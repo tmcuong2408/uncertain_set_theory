@@ -169,4 +169,20 @@
 		\mathrm{Val}(|S|) = \{ |S^*| : S^* \in \mathrm{Conf}(S) \} = \{1, 2\} \subseteq \mathbb{N}
 		\]
 	\end{example}
+	\begin{definition}[Element Membership in an Uncertain Set]
+		Let $U$ be a non-empty universal set, and let $S = \{x_i : i \in I\}$ be an uncertain set on $U$.
+		
+		1. For a classical element $u \in U$, the assertion $u \in_u S$ (read as ``$u$ belongs to the uncertain set $S$'') is a multi-state logical proposition whose possibility domain of truth value is defined through the configuration space $\mathrm{Conf}(S)$:
+		\[
+		\mathrm{Val}(u \in_u S) = \{ (u \in S^*) : S^* \in \mathrm{Conf}(S) \} \subseteq \{\text{True}, \text{False}\}
+		\]
+		where $(u \in S^*)$ denotes the classical element membership assertion.
+		
+		2. For an uncertain element $y$ on $U$ with possibility domain $\mathrm{Val}(y) \subseteq U$, the assertion $y \in_u S$ is defined via joint configuration collapse:
+		\[
+		\mathrm{Val}(y \in_u S) = \{ (v \in S^*) : v \in \mathrm{Val}(y), \, S^* \in \mathrm{Conf}(S) \} \subseteq \{\text{True}, \text{False}\}
+		\]
+		
+		We say that $u \in_u S$ (or $y \in_u S$) is \textbf{certainly true} if $\mathrm{Val}(\cdot) = \{\text{True}\}$, \textbf{certainly false} if $\mathrm{Val}(\cdot) = \{\text{False}\}$, and \textbf{strictly uncertain} if $\mathrm{Val}(\cdot) = \{\text{True}, \text{False}\}$.
+	\end{definition}
 \end{document}

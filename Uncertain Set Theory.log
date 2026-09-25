@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.9.22)  26 SEP 2026 02:38
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.9.22)  26 SEP 2026 04:05
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1312,11 +1312,11 @@ Package rerunfilecheck Info: File `"Uncertain Set Theory".out' has not changed.
 (rerunfilecheck)             Checksum: 0A6733E364A224C77A3EC5D3D2B6E511;200.
  ) 
 Here is how much of TeX's memory you used:
- 18071 strings out of 467525
- 285114 string characters out of 5423209
+ 18102 strings out of 467525
+ 285417 string characters out of 5423209
  779663 words of memory out of 5000000
- 46590 multiletter control sequences out of 15000+600000
- 648065 words of font info for 168 fonts, out of 8000000 for 9000
+ 46594 multiletter control sequences out of 15000+600000
+ 649976 words of font info for 182 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  85i,12n,93p,1019b,732s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/tex
@@ -1333,10 +1333,10 @@ xmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><c:/texlive/2026/texmf-
 dist/fonts/type1/public/cm-super/sfrm0800.pfb><c:/texlive/2026/texmf-dist/fonts
 /type1/public/cm-super/sfrm1200.pfb><c:/texlive/2026/texmf-dist/fonts/type1/pub
 lic/cm-super/sfti1440.pfb>
-Output written on "Uncertain Set Theory.pdf" (7 pages, 168350 bytes).
+Output written on "Uncertain Set Theory.pdf" (7 pages, 171576 bytes).
 PDF statistics:
- 137 PDF objects out of 1000 (max. 8388607)
- 97 compressed objects within 1 object stream
- 17 named destinations out of 1000 (max. 500000)
- 47121 words of extra memory for PDF output out of 51595 (max. 10000000)
+ 138 PDF objects out of 1000 (max. 8388607)
+ 98 compressed objects within 1 object stream
+ 18 named destinations out of 1000 (max. 500000)
+ 51217 words of extra memory for PDF output out of 51595 (max. 10000000)
 
