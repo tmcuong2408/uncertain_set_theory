@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.9.22)  26 SEP 2026 04:05
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.9.22)  27 SEP 2026 03:01
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1298,7 +1298,11 @@ ory.toc) [3]
 
 ]
 Chapter 1.
-[5] [6] [7]
+[5] [6] [7] [8]
+bibitemlist
+[9
+
+]
 \tf@toc=\write5
 \openout5 = `"Uncertain Set Theory.toc"'.
 
@@ -1309,16 +1313,16 @@ L3 programming layer <2020/03/25>
  ***********
 Package rerunfilecheck Info: File `"Uncertain Set Theory".out' has not changed.
 
-(rerunfilecheck)             Checksum: 0A6733E364A224C77A3EC5D3D2B6E511;200.
+(rerunfilecheck)             Checksum: E09D65BCC7B68AF24B824F613ADAEDE8;304.
  ) 
 Here is how much of TeX's memory you used:
- 18102 strings out of 467525
- 285417 string characters out of 5423209
- 779663 words of memory out of 5000000
- 46594 multiletter control sequences out of 15000+600000
- 649976 words of font info for 182 fonts, out of 8000000 for 9000
+ 18144 strings out of 467525
+ 286076 string characters out of 5423209
+ 780869 words of memory out of 5000000
+ 46609 multiletter control sequences out of 15000+600000
+ 650947 words of font info for 193 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 85i,12n,93p,1019b,732s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 85i,12n,93p,1019b,644s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/tex
 live/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><c:/texlive/20
 26/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2026/texmf-
@@ -1329,14 +1333,15 @@ onts/cm/cmr12.pfb><c:/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cm
 r17.pfb><c:/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl12.pfb><
 c:/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texliv
 e/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb><c:/texlive/2026/te
-xmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><c:/texlive/2026/texmf-
-dist/fonts/type1/public/cm-super/sfrm0800.pfb><c:/texlive/2026/texmf-dist/fonts
-/type1/public/cm-super/sfrm1200.pfb><c:/texlive/2026/texmf-dist/fonts/type1/pub
-lic/cm-super/sfti1440.pfb>
-Output written on "Uncertain Set Theory.pdf" (7 pages, 171576 bytes).
+xmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb><c:/texlive/2026/texmf-dist/
+fonts/type1/public/amsfonts/symbols/msbm10.pfb><c:/texlive/2026/texmf-dist/font
+s/type1/public/cm-super/sfrm0800.pfb><c:/texlive/2026/texmf-dist/fonts/type1/pu
+blic/cm-super/sfrm1200.pfb><c:/texlive/2026/texmf-dist/fonts/type1/public/cm-su
+per/sfti1440.pfb>
+Output written on "Uncertain Set Theory.pdf" (9 pages, 183245 bytes).
 PDF statistics:
- 138 PDF objects out of 1000 (max. 8388607)
- 98 compressed objects within 1 object stream
- 18 named destinations out of 1000 (max. 500000)
- 51217 words of extra memory for PDF output out of 51595 (max. 10000000)
+ 165 PDF objects out of 1000 (max. 8388607)
+ 120 compressed objects within 2 object streams
+ 24 named destinations out of 1000 (max. 500000)
+ 51737 words of extra memory for PDF output out of 61914 (max. 10000000)
 

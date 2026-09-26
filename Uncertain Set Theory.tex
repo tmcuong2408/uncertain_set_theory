@@ -76,14 +76,14 @@
 	\small Address: DJ7 Street, Thoi Hoa, Ho Chi Minh City, Vietnam \\
 	\small \textit{Research Field: Mathematics of Uncertainty}
 }
-\date{Last updated: \today}
+\date{Last updated: \today \\ \small DOI / Reference: \url{https://doi.org/10.5281/zenodo.22982412} \cite{tran2026extended}}
 
 \begin{document}
 	
 	\maketitle
 	
 	\begin{abstract}
-		This paper establishes \textbf{Uncertain Set Theory}, a novel foundational mathematical framework built from First Principles to model uncertainty without relying on probabilistic distributions, fuzzy membership degrees, or static interval bounds. Traditional approaches such as Interval Arithmetic frequently suffer from correlation loss and catastrophic numerical noise explosion, while probabilistic models require prior knowledge of probability densities that are often unavailable in real-world high-noise environments. 
+		This paper establishes \textbf{Uncertain Set Theory}, a novel foundational mathematical framework built from First Principles to model uncertainty without relying on probabilistic distributions, fuzzy membership degrees, or static interval bounds. Traditional approaches such as Interval Arithmetic frequently suffer from correlation loss and catastrophic numerical noise explosion, while probabilistic models require prior knowledge of probability densities that are often unavailable in real-world high-noise environments \cite{tran2026extended}. 
 		
 		We address these fundamental limitations by introducing the concepts of \textbf{Uncertain Elements} and \textbf{Uncertain Sets}, defined as multi-state superposition entities characterized by possibility domains $\mathrm{Val}(x)$ and configuration spaces $\mathrm{Conf}(S)$. Through this scenario-based structural formulation, we demonstrate that set cardinality itself unifies naturally as an uncertain number $|S| \in \mathbf{U}(\mathbb{N})$, resolving cardinality degeneration and state-collapse seamlessly. Furthermore, algebraic operations on uncertain sets inherit classical binary set relations over their configuration spaces, preserving absolute logical correlation and enabling canonical complexity reduction down to $\mathcal{O}(1)$ via Lazy Evaluation. This framework serves as the core foundation for $U(\mathbb{K})$ arithmetic, scenario-space optimization, and high-dimensional uncertain topology.
 		
@@ -118,12 +118,16 @@
 		The collection of all possible configurations of $S$ is denoted by $\mathrm{Conf}(S)$.
 	\end{definition}
 	
+	\begin{definition}[Cardinality Operator]
+		Let $A$ be a classical set. The \textbf{cardinality} (or cardinal number) of $A$, denoted by $\mathrm{card}(A)$ or $|A|$, represents the measure of the number of elements in $A$. For any configuration $S^* \in \mathrm{Conf}(S)$, $\mathrm{card}(S^*)$ maps $S^*$ to its non-negative cardinal measure in $\mathbb{N} \cup \{\infty\}$.
+	\end{definition}
+	
 	\begin{definition}[Uncertain Cardinality]
-		Let $S = \{x_i : i \in I\}$ be an uncertain set on the universal set $U$. The \textbf{uncertain cardinality} (or number of uncertain elements) of $S$, denoted by $|S|$, is an uncertain number on the set of natural numbers $\mathbb{N}$ whose possibility domain is defined by:
+		Let $S = \{x_i : i \in I\}$ be an uncertain set on the universal set $U$. The \textbf{uncertain cardinality} (or number of uncertain elements) of $S$, denoted by $|S|$ or $\mathrm{card}(S)$, is an uncertain number on the set of natural numbers $\mathbb{N}$ whose possibility domain is defined by:
 		\[
-		\mathrm{Val}(|S|) = \{ |S^*| : S^* \in \mathrm{Conf}(S) \} \subseteq \mathbb{N}
+		\mathrm{Val}(|S|) = \mathrm{Val}(\mathrm{card}(S)) = \{ \mathrm{card}(S^*) : S^* \in \mathrm{Conf}(S) \} \subseteq \mathbb{N}
 		\]
-		where $|S^*|$ represents the classical cardinality of the configuration $S^*$.
+		where $\mathrm{card}(S^*) = |S^*|$ represents the classical cardinality of the configuration $S^*$.
 	\end{definition}
 	
 	\begin{remark}
@@ -154,17 +158,17 @@
 		
 		Assuming the states of $x_1$ and $x_2$ vary independently, the configuration space $\mathrm{Conf}(S)$ consists of $2 \times 2 = 4$ realized states:
 		\begin{itemize}
-			\item When $x_1 = 1, x_2 = 1 \implies S_1^* = \{1, 1\} = \{1\}$ (due to element deduplication in classical set theory), implying $|S_1^*| = 1$.
-			\item When $x_1 = 1, x_2 = 3 \implies S_2^* = \{1, 3\}$, implying $|S_2^*| = 2$.
-			\item When $x_1 = 2, x_2 = 1 \implies S_3^* = \{2, 1\}$, implying $|S_3^*| = 2$.
-			\item When $x_1 = 2, x_2 = 3 \implies S_4^* = \{2, 3\}$, implying $|S_4^*| = 2$.
+			\item When $x_1 = 1, x_2 = 1 \implies S_1^* = \{1, 1\} = \{1\}$ (due to element deduplication in classical set theory), implying $|S_1^*| = \mathrm{card}(S_1^*) = 1$.
+			\item When $x_1 = 1, x_2 = 3 \implies S_2^* = \{1, 3\}$, implying $|S_2^*| = \mathrm{card}(S_2^*) = 2$.
+			\item When $x_1 = 2, x_2 = 1 \implies S_3^* = \{2, 1\}$, implying $|S_3^*| = \mathrm{card}(S_3^*) = 2$.
+			\item When $x_1 = 2, x_2 = 3 \implies S_4^* = \{2, 3\}$, implying $|S_4^*| = \mathrm{card}(S_4^*) = 2$.
 		\end{itemize}
 		
 		Therefore, the set of all possible configurations of $S$ is:
 		\[
 		\mathrm{Conf}(S) = \big\{ \{1\}, \{1, 3\}, \{1, 2\}, \{2, 3\} \big\}
 		\]
-		Hence, the uncertain cardinality $|S|$ has a possibility domain that constitutes an uncertain number on $\mathbb{N}$:
+		Hence, the uncertain cardinality $|S|$ (or $\mathrm{card}(S)$) has a possibility domain that constitutes an uncertain number on $\mathbb{N}$:
 		\[
 		\mathrm{Val}(|S|) = \{ |S^*| : S^* \in \mathrm{Conf}(S) \} = \{1, 2\} \subseteq \mathbb{N}
 		\]
@@ -185,4 +189,10 @@
 		
 		We say that $u \in_u S$ (or $y \in_u S$) is \textbf{certainly true} if $\mathrm{Val}(\cdot) = \{\text{True}\}$, \textbf{certainly false} if $\mathrm{Val}(\cdot) = \{\text{False}\}$, and \textbf{strictly uncertain} if $\mathrm{Val}(\cdot) = \{\text{True}, \text{False}\}$.
 	\end{definition}
+	
+	\begin{thebibliography}{9}
+		\bibitem{tran2026extended}
+		Tran, M. C. (2026). \textit{Extended logic and mathematics of uncertainty}. Zenodo. DOI: \href{https://doi.org/10.5281/zenodo.22982412}{10.5281/zenodo.22982412}.
+	\end{thebibliography}
+	
 \end{document}
