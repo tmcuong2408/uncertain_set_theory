@@ -133,14 +133,19 @@
 		If all uncertain elements $x_i$ in $S$ take distinct values across their entire possibility domains, we have $|S^*| = |I|$ for all $S^* \in \mathrm{Conf}(S)$, in which case the uncertain cardinality degenerates into a classical number $|\mathcal{S}| = |I|$. Conversely, size degeneration (cardinality collapse) occurs at configurations $S^*$ where duplicate values appear among the elements ($v_i = v_j$ for $i \neq j$).
 	\end{remark}
 	
+	\begin{definition}[Configuration-Based Relation on Uncertain Sets]
+		Let $\mathcal{S}_1 = (S_1, \mathrm{Conf}(S_1))$ and $\mathcal{S}_2 = (S_2, \mathrm{Conf}(S_2))$ be two uncertain sets defined on the universal set $U$, and let $R$ be a classical binary set relation (such as $=, \subseteq, \subset$). 
+		
+		We say that the relation $\mathcal{S}_1 \, R \, \mathcal{S}_2$ holds if and only if their induced configuration spaces satisfy the relation $R$:
+		\[
+		\mathcal{S}_1 \, R \, \mathcal{S}_2 \iff \mathrm{Conf}(S_1) \, R \, \mathrm{Conf}(S_2)
+		\]
+		That is, the structural relationship between $\mathcal{S}_1$ and $\mathcal{S}_2$ is entirely determined by the corresponding relation over their realized configuration spaces across all scenarios, regardless of their underlying symbolic representations $S_1$ and $S_2$.
+	\end{definition}
 	\begin{definition}[Binary Operations on Uncertain Sets]
 		Let $\mathcal{S}_1 = (S_1, \mathrm{Conf}(S_1))$ and $\mathcal{S}_2 = (S_2, \mathrm{Conf}(S_2))$ be two uncertain sets on the universal set $U$, and let $\star$ be a classical binary set operation (such as $\cup, \cap, \setminus$). The corresponding binary operation on uncertain sets, denoted by $\mathcal{S}_1 \star \mathcal{S}_2$, is an uncertain set defined by the tuple:
 		\[
 		\mathcal{S}_1 \star \mathcal{S}_2 = (S_1 \star S_2, \, \mathrm{Conf}(\mathcal{S}_1 \star \mathcal{S}_2))
-		\]
-		where $S_1 \star S_2$ is a symbolic set expression satisfying:
-		\[
-		\mathrm{Conf}(S_1 \star S_2) = \mathrm{Conf}(\mathcal{S}_1 \star \mathcal{S}_2)
 		\]
 		and its configuration space is explicitly given by:
 		\[
