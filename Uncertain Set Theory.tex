@@ -80,181 +80,181 @@
 \date{Last updated: \today \\ \small DOI / Reference: \url{https://doi.org/10.5281/zenodo.22982412} \cite{tran2026extended}}
 
 \begin{document}
-	
-	\maketitle
-	
-	\begin{abstract}
-		This paper establishes Uncertain Set Theory, a novel foundational mathematical framework built from First Principles to model uncertainty without relying on probabilistic distributions, fuzzy membership degrees, or static interval bounds. Traditional approaches such as Interval Arithmetic frequently suffer from correlation loss and catastrophic numerical noise explosion, while probabilistic models require prior knowledge of probability densities that are often unavailable in real-world high-noise environments \cite{tran2026extended}. 
-		
-		We address these fundamental limitations by defining Uncertain Elements and Uncertain Sets directly as collections of state-dependent uncertain entities $S = \{x_i : i \in I\}$. Through this scenario-based structural formulation, we show that every uncertain set canonically induces a Configuration Space $\mathrm{Conf}(S)$, allowing set cardinality itself to unify naturally as an uncertain number $\mathrm{ucard}(S) \in \mathbf{U}(\mathbb{N})$, resolving cardinality degeneration and state-collapse seamlessly. Furthermore, algebraic operations on uncertain sets inherit classical binary set relations over their configuration spaces, preserving absolute logical correlation and enabling canonical complexity reduction down to $\mathcal{O}(1)$ via Lazy Evaluation. This framework serves as the core foundation for $\mathbf{U}(\mathbb{K})$ arithmetic, scenario-space optimization, and high-dimensional uncertain topology.
-		
-		\vspace{1em}
-		\noindent Keywords: Uncertain Set Theory, Uncertain Elements, Configuration Space, State Superposition, Uncertain Cardinality, Scenario Space, Scenario-Based Arithmetic, Correlation Loss, $\mathbf{U}(\mathbb{K})$ Spaces, First Principles.
-	\end{abstract}
-	
-	\chapter{Uncertain Sets}
-	
-	\begin{definition}[Uncertain Element]
-		Let $U$ be a non-empty universal set. An uncertain element $x$ on $U$ is an object whose exact value in $U$ is undetermined, constrained only by a non-empty set of possible values $A \subseteq U$:
-		\[
+
+\maketitle
+
+\begin{abstract}
+	This paper establishes Uncertain Set Theory, a novel foundational mathematical framework built from First Principles to model uncertainty without relying on probabilistic distributions, fuzzy membership degrees, or static interval bounds. Traditional approaches such as Interval Arithmetic frequently suffer from correlation loss and catastrophic numerical noise explosion, while probabilistic models require prior knowledge of probability densities that are often unavailable in real-world high-noise environments \cite{tran2026extended}.
+
+	We address these fundamental limitations by defining Uncertain Elements and Uncertain Sets directly as collections of state-dependent uncertain entities $S = \{x_i : i \in I\}$. Through this scenario-based structural formulation, we show that every uncertain set canonically induces a Configuration Space $\mathrm{Conf}(S)$, allowing set cardinality itself to unify naturally as an uncertain number $\mathrm{ucard}(S) \in \mathbf{U}(\mathbb{N})$, resolving cardinality degeneration and state-collapse seamlessly. Furthermore, algebraic operations on uncertain sets inherit classical binary set relations over their configuration spaces, preserving absolute logical correlation and enabling canonical complexity reduction down to $\mathcal{O}(1)$ via Lazy Evaluation. This framework serves as the core foundation for $\mathbf{U}(\mathbb{K})$ arithmetic, scenario-space optimization, and high-dimensional uncertain topology.
+
+	\vspace{1em}
+	\noindent Keywords: Uncertain Set Theory, Uncertain Elements, Configuration Space, State Superposition, Uncertain Cardinality, Scenario Space, Scenario-Based Arithmetic, Correlation Loss, $\mathbf{U}(\mathbb{K})$ Spaces, First Principles.
+\end{abstract}
+
+\chapter{Uncertain Sets}
+
+\begin{definition}[Uncertain Element]
+	Let $U$ be a non-empty universal set. An uncertain element $x$ on $U$ is an object whose exact value in $U$ is undetermined, constrained only by a non-empty set of possible values $A \subseteq U$:
+	\[
 		x \in A
-		\]
-		The set $A$ is called the possibility domain (or state space) of $x$, denoted by $\mathrm{Val}(x) = A$.
-	\end{definition}
-	
-	\begin{definition}[Uncertain Set]
-		Let $U$ be a non-empty universal set and $I$ be an index set. An uncertain set $S$ on $U$ is a indexed family of uncertain elements on $U$:
-		\[
+	\]
+	The set $A$ is called the possibility domain (or state space) of $x$, denoted by $\mathrm{Val}(x) = A$.
+\end{definition}
+
+\begin{definition}[Uncertain Set]
+	Let $U$ be a non-empty universal set and $I$ be an index set. An uncertain set $S$ on $U$ is a indexed family of uncertain elements on $U$:
+	\[
 		S = \{x_i : i \in I\}
-		\]
-		where each uncertain element $x_i$ ($i \in I$) has a possibility domain $\mathrm{Val}(x_i) \subseteq U$.
-	\end{definition}
-	
-	\begin{definition}[Configuration Space]
-		Let $S = \{x_i : i \in I\}$ be an uncertain set on $U$. A realized configuration (or empirical state) of $S$ is a classical set $S^* \subseteq U$ obtained when all constituent elements $x_i$ simultaneously realize specific values $v_i \in \mathrm{Val}(x_i)$:
-		\[
+	\]
+	where each uncertain element $x_i$ ($i \in I$) has a possibility domain $\mathrm{Val}(x_i) \subseteq U$.
+\end{definition}
+
+\begin{definition}[Configuration Space]
+	Let $S = \{x_i : i \in I\}$ be an uncertain set on $U$. A realized configuration (or empirical state) of $S$ is a classical set $S^* \subseteq U$ obtained when all constituent elements $x_i$ simultaneously realize specific values $v_i \in \mathrm{Val}(x_i)$:
+	\[
 		S^* = \{v_i : i \in I\}
-		\]
-		The collection of all classical sets realized by $S$ is called the configuration space of $S$, denoted by $\mathrm{Conf}(S)$.
-	\end{definition}
-	
-	\begin{definition}[Classical Cardinality Operator]
-		Let $A$ be a classical set. The classical cardinality of $A$, denoted by $\mathrm{card}(A)$ or $|A|$, measure the number of distinct elements in $A$. For any configuration $S^* \in \mathrm{Conf}(S)$, $\mathrm{card}(S^*)$ maps $S^*$ to its cardinal value in $\mathbb{N} \cup \{\infty\}$.
-	\end{definition}
-	
-	\begin{definition}[Uncertain Cardinality]
-		Let $S = \{x_i : i \in I\}$ be an uncertain set on $U$. The uncertain cardinality (or size) of $S$, denoted by $\mathrm{ucard}(S)$, is an uncertain number on $\mathbb{N}$ whose possibility domain consists of the classical cardinalities of all realized states in its configuration space $\mathrm{Conf}(S)$:
-		\[
+	\]
+	The collection of all classical sets realized by $S$ is called the configuration space of $S$, denoted by $\mathrm{Conf}(S)$.
+\end{definition}
+
+\begin{definition}[Classical Cardinality Operator]
+	Let $A$ be a classical set. The classical cardinality of $A$, denoted by $\mathrm{card}(A)$ or $|A|$, measure the number of distinct elements in $A$. For any configuration $S^* \in \mathrm{Conf}(S)$, $\mathrm{card}(S^*)$ maps $S^*$ to its cardinal value in $\mathbb{N} \cup \{\infty\}$.
+\end{definition}
+
+\begin{definition}[Uncertain Cardinality]
+	Let $S = \{x_i : i \in I\}$ be an uncertain set on $U$. The uncertain cardinality (or size) of $S$, denoted by $\mathrm{ucard}(S)$, is an uncertain number on $\mathbb{N}$ whose possibility domain consists of the classical cardinalities of all realized states in its configuration space $\mathrm{Conf}(S)$:
+	\[
 		\mathrm{Val}(\mathrm{ucard}(S)) = \{ \mathrm{card}(S^*) : S^* \in \mathrm{Conf}(S) \} \subseteq \mathbb{N}
-		\]
-		where $\mathrm{card}(S^*) = |S^*|$ represents the classical cardinality of the configuration $S^*$.
-	\end{definition}
-	
-	\begin{remark}
-		If all uncertain elements $x_i \in S$ take mutually distinct values across all realized configurations, then $|S^*| = |I|$ for every $S^* \in \mathrm{Conf}(S)$, in which case the uncertain cardinality degenerates into a classical constant $\mathrm{ucard}(S) = |I|$. Conversely, cardinality degeneration (state collapse) occurs at configurations $S^*$ where duplicate values appear ($v_i = v_j$ for some $i \neq j$).
-	\end{remark}
-	
-	\begin{example}[Numerical Illustration of Configuration Space and Uncertain Cardinality]
-		Consider the universal set $U = \mathbb{R}$. Let $x_1$ and $x_2$ be two uncertain elements with possibility domains:
-		\[
+	\]
+	where $\mathrm{card}(S^*) = |S^*|$ represents the classical cardinality of the configuration $S^*$.
+\end{definition}
+
+\begin{remark}
+	If all uncertain elements $x_i \in S$ take mutually distinct values across all realized configurations, then $|S^*| = |I|$ for every $S^* \in \mathrm{Conf}(S)$, in which case the uncertain cardinality degenerates into a classical constant $\mathrm{ucard}(S) = |I|$. Conversely, cardinality degeneration (state collapse) occurs at configurations $S^*$ where duplicate values appear ($v_i = v_j$ for some $i \neq j$).
+\end{remark}
+
+\begin{example}[Numerical Illustration of Configuration Space and Uncertain Cardinality]
+	Consider the universal set $U = \mathbb{R}$. Let $x_1$ and $x_2$ be two uncertain elements with possibility domains:
+	\[
 		\mathrm{Val}(x_1) = \{1, 2\}, \quad \mathrm{Val}(x_2) = \{1, 3\}
-		\]
-		Let $S = \{x_1, x_2\}$ be an uncertain set.
-		
-		Assuming $x_1$ and $x_2$ vary independently, the joint scenario space yields $2 \times 2 = 4$ realized classical configurations:
-		\begin{itemize}
-			\item $x_1 = 1, x_2 = 1 \implies S_1^* = \{1, 1\} = \{1\}$, with $|S_1^*| = \mathrm{card}(S_1^*) = 1$.
-			\item $x_1 = 1, x_2 = 3 \implies S_2^* = \{1, 3\}$, with $|S_2^*| = \mathrm{card}(S_2^*) = 2$.
-			\item $x_1 = 2, x_2 = 1 \implies S_3^* = \{2, 1\}$, with $|S_3^*| = \mathrm{card}(S_3^*) = 2$.
-			\item $x_1 = 2, x_2 = 3 \implies S_4^* = \{2, 3\}$, with $|S_4^*| = \mathrm{card}(S_4^*) = 2$.
-		\end{itemize}
-		
-		Thus, the configuration space of $S$ is explicitly:
-		\[
+	\]
+	Let $S = \{x_1, x_2\}$ be an uncertain set.
+
+	Assuming $x_1$ and $x_2$ vary independently, the joint scenario space yields $2 \times 2 = 4$ realized classical configurations:
+	\begin{itemize}
+		\item $x_1 = 1, x_2 = 1 \implies S_1^* = \{1, 1\} = \{1\}$, with $|S_1^*| = \mathrm{card}(S_1^*) = 1$.
+		\item $x_1 = 1, x_2 = 3 \implies S_2^* = \{1, 3\}$, with $|S_2^*| = \mathrm{card}(S_2^*) = 2$.
+		\item $x_1 = 2, x_2 = 1 \implies S_3^* = \{2, 1\}$, with $|S_3^*| = \mathrm{card}(S_3^*) = 2$.
+		\item $x_1 = 2, x_2 = 3 \implies S_4^* = \{2, 3\}$, with $|S_4^*| = \mathrm{card}(S_4^*) = 2$.
+	\end{itemize}
+
+	Thus, the configuration space of $S$ is explicitly:
+	\[
 		\mathrm{Conf}(S) = \big\{ \{1\}, \{1, 3\}, \{1, 2\}, \{2, 3\} \big\}
-		\]
-		The possibility domain of the uncertain cardinality $\mathrm{ucard}(S)$ is the uncertain number on $\mathbb{N}$ given by:
-		\[
+	\]
+	The possibility domain of the uncertain cardinality $\mathrm{ucard}(S)$ is the uncertain number on $\mathbb{N}$ given by:
+	\[
 		\mathrm{Val}(\mathrm{ucard}(S)) = \{ |S^*| : S^* \in \mathrm{Conf}(S) \} = \{1, 2\} \subseteq \mathbb{N}
-		\]
-	\end{example}
-	
-	\begin{definition}[Element Membership Valuation via Scenario Measure]
-		Let $S = \{x_1, x_2, \dots, x_n\}$ be an uncertain set on a non-empty universe $U$, where each uncertain element $x_i$ has an independent possibility domain $\mathrm{Val}(x_i) \subseteq U$. 
-		
-		The global scenario space of $S$ is the Cartesian product:
-		\[
+	\]
+\end{example}
+
+\begin{definition}[Element Membership Valuation via Scenario Measure]
+	Let $S = \{x_1, x_2, \dots, x_n\}$ be an uncertain set on a non-empty universe $U$, where each uncertain element $x_i$ has an independent possibility domain $\mathrm{Val}(x_i) \subseteq U$.
+
+	The global scenario space of $S$ is the Cartesian product:
+	\[
 		\Omega_S = \mathrm{Val}(x_1) \times \mathrm{Val}(x_2) \times \dots \times \mathrm{Val}(x_n)
-		\]
-		equipped with a product measure $\lambda$. Each state tuple $\mathbf{v} = (v_1, \dots, v_n) \in \Omega_S$ uniquely induces a realized configuration $S^*(\mathbf{v}) = \{v_1, \dots, v_n\} \in \mathrm{Conf}(S)$.
-		
-		For any classical element $u \in U$, let $E_u \subseteq \Omega_S$ be the measurable set of scenarios whose realized configuration contains $u$:
-		\[
+	\]
+	equipped with a product measure $\lambda$. Each state tuple $\mathbf{v} = (v_1, \dots, v_n) \in \Omega_S$ uniquely induces a realized configuration $S^*(\mathbf{v}) = \{v_1, \dots, v_n\} \in \mathrm{Conf}(S)$.
+
+	For any classical element $u \in U$, let $E_u \subseteq \Omega_S$ be the measurable set of scenarios whose realized configuration contains $u$:
+	\[
 		E_u = \{\mathbf{v} \in \Omega_S \;:\; u \in S^*(\mathbf{v})\}
-		\]
-		The truth value of the membership assertion $u \in_u S$ is defined by the normalized measure:
-		\[
+	\]
+	The truth value of the membership assertion $u \in_u S$ is defined by the normalized measure:
+	\[
 		\mathcal{V}(u \in_u S) := \frac{\lambda(E_u)}{\lambda(\Omega_S)} \in [0, 1]
-		\]
-	\end{definition}
-	
-	\begin{example}[Numerical Illustration of Membership Valuation]
-		Consider $U = \mathbb{R}$ and uncertain elements $x_1, x_2$ with independent possibility domains:
-		\[
+	\]
+\end{definition}
+
+\begin{example}[Numerical Illustration of Membership Valuation]
+	Consider $U = \mathbb{R}$ and uncertain elements $x_1, x_2$ with independent possibility domains:
+	\[
 		\mathrm{Val}(x_1) = \{1, 3, 5, 7\}, \quad \mathrm{Val}(x_2) = \{2, 3, 4, 5\}
-		\]
-		Let $S = \{x_1, x_2\}$. The joint scenario space is $\Omega_S = \mathrm{Val}(x_1) \times \mathrm{Val}(x_2)$. Equipping $\Omega_S$ with the counting measure $\lambda$, the total measure is $\lambda(\Omega_S) = 4 \times 4 = 16$.
-		
-		The 16 state tuples $\mathbf{v} = (v_1, v_2) \in \Omega_S$ and their realized configurations $S^*(\mathbf{v})$ are:
-		\begin{align*}
-			\Omega_S = \{ &(1,2), (1,3), (1,4), (1,5), (3,2), (3,3), \\
-			&(3,4), (3,5), (5,2), (5,3), (5,4), (5,5), \\
-			&(7,2), (7,3), (7,4), (7,5) \}
-		\end{align*}
-		
-		To evaluate the truth measure of $3 \in_u S$, we identify $E_3 \subseteq \Omega_S$ where $3 \in S^*(\mathbf{v})$:
-		\[
+	\]
+	Let $S = \{x_1, x_2\}$. The joint scenario space is $\Omega_S = \mathrm{Val}(x_1) \times \mathrm{Val}(x_2)$. Equipping $\Omega_S$ with the counting measure $\lambda$, the total measure is $\lambda(\Omega_S) = 4 \times 4 = 16$.
+
+	The 16 state tuples $\mathbf{v} = (v_1, v_2) \in \Omega_S$ and their realized configurations $S^*(\mathbf{v})$ are:
+	\begin{align*}
+		\Omega_S = \{ & (1,2), (1,3), (1,4), (1,5), (3,2), (3,3), \\
+		              & (3,4), (3,5), (5,2), (5,3), (5,4), (5,5), \\
+		              & (7,2), (7,3), (7,4), (7,5) \}
+	\end{align*}
+
+	To evaluate the truth measure of $3 \in_u S$, we identify $E_3 \subseteq \Omega_S$ where $3 \in S^*(\mathbf{v})$:
+	\[
 		E_3 = \{(1,3), (3,2), (3,3), (3,4), (3,5), (5,3), (7,3)\}
-		\]
-		Since $\lambda(E_3) = |E_3| = 7$, the truth valuation is:
-		\[
+	\]
+	Since $\lambda(E_3) = |E_3| = 7$, the truth valuation is:
+	\[
 		\mathcal{V}(3 \in_u S) = \frac{\lambda(E_3)}{\lambda(\Omega_S)} = \frac{7}{16} = 0.4375
-		\]
-	\end{example}
-	
-	\begin{theorem}[Conservation of Total Membership Valuation]
-		Let $U$ be a non-empty universal set and let $S = \{x_1, x_2, \dots, x_n\}$ be an uncertain set consisting of $n$ uncertain elements with finite possibility domains $\mathrm{Val}(x_i) \subseteq U$.
-		
-		Then, the sum of the membership truth valuations of all elements $u \in U$ equals the expected value of the uncertain cardinality $\mathrm{ucard}(S)$ over the finite scenario space $\Omega_S$:
-		\[
+	\]
+\end{example}
+
+\begin{theorem}[Conservation of Total Membership Valuation]
+	Let $U$ be a non-empty universal set and let $S = \{x_1, x_2, \dots, x_n\}$ be an uncertain set consisting of $n$ uncertain elements with finite possibility domains $\mathrm{Val}(x_i) \subseteq U$.
+
+	Then, the sum of the membership truth valuations of all elements $u \in U$ equals the expected value of the uncertain cardinality $\mathrm{ucard}(S)$ over the finite scenario space $\Omega_S$:
+	\[
 		\sum_{u \in U} \mathcal{V}(u \in_u S) = \mathbb{E}\left[\mathrm{ucard}(S)\right]
-		\]
-		where the expected cardinality $\mathbb{E}\left[\mathrm{ucard}(S)\right]$ is defined as the arithmetic mean of realized cardinalities across all scenarios:
-		\[
+	\]
+	where the expected cardinality $\mathbb{E}\left[\mathrm{ucard}(S)\right]$ is defined as the arithmetic mean of realized cardinalities across all scenarios:
+	\[
 		\mathbb{E}\left[\mathrm{ucard}(S)\right] = \frac{1}{|\Omega_S|} \sum_{\mathbf{v} \in \Omega_S} |S^*(\mathbf{v})|
-		\]
-		and $|S^*(\mathbf{v})|$ represents the classical cardinality of the realized configuration $S^*(\mathbf{v}) = \{v_1, \dots, v_n\}$ at scenario $\mathbf{v} = (v_1, \dots, v_n) \in \Omega_S$.
-	\end{theorem}
-	
-	\begin{proof}
-		By Definition 1.6, for each element $u \in U$, the truth valuation of $u \in_u S$ under the counting measure is:
-		\[
+	\]
+	and $|S^*(\mathbf{v})|$ represents the classical cardinality of the realized configuration $S^*(\mathbf{v}) = \{v_1, \dots, v_n\}$ at scenario $\mathbf{v} = (v_1, \dots, v_n) \in \Omega_S$.
+\end{theorem}
+
+\begin{proof}
+	By Definition 1.6, for each element $u \in U$, the truth valuation of $u \in_u S$ under the counting measure is:
+	\[
 		\mathcal{V}(u \in_u S) = \frac{|E_u|}{|\Omega_S|}
-		\]
-		where $E_u = \{\mathbf{v} \in \Omega_S \;:\; u \in S^*(\mathbf{v})\}$ is the subset of scenarios whose realized configuration contains $u$.
-		
-		Using the indicator function $\mathbb{I}_{\{u \in S^*(\mathbf{v})\}}(\mathbf{v})$, the cardinality $|E_u|$ is expressed as:
-		\[
+	\]
+	where $E_u = \{\mathbf{v} \in \Omega_S \;:\; u \in S^*(\mathbf{v})\}$ is the subset of scenarios whose realized configuration contains $u$.
+
+	Using the indicator function $\mathbb{I}_{\{u \in S^*(\mathbf{v})\}}(\mathbf{v})$, the cardinality $|E_u|$ is expressed as:
+	\[
 		|E_u| = \sum_{\mathbf{v} \in \Omega_S} \mathbb{I}_{\{u \in S^*(\mathbf{v})\}}(\mathbf{v})
-		\]
-		
-		Summing the truth valuations over all $u \in U$:
-		\[
+	\]
+
+	Summing the truth valuations over all $u \in U$:
+	\[
 		\sum_{u \in U} \mathcal{V}(u \in_u S) = \frac{1}{|\Omega_S|} \sum_{u \in U} \sum_{\mathbf{v} \in \Omega_S} \mathbb{I}_{\{u \in S^*(\mathbf{v})\}}(\mathbf{v})
-		\]
-		
-		Since $S^*(\mathbf{v})$ contains at most $n$ elements for any scenario $\mathbf{v}$, the set of elements $u \in U$ with non-zero indicator is finite. Interchanging the order of double summation yields:
-		\[
+	\]
+
+	Since $S^*(\mathbf{v})$ contains at most $n$ elements for any scenario $\mathbf{v}$, the set of elements $u \in U$ with non-zero indicator is finite. Interchanging the order of double summation yields:
+	\[
 		\sum_{u \in U} \sum_{\mathbf{v} \in \Omega_S} \mathbb{I}_{\{u \in S^*(\mathbf{v})\}}(\mathbf{v}) = \sum_{\mathbf{v} \in \Omega_S} \left( \sum_{u \in U} \mathbb{I}_{\{u \in S^*(\mathbf{v})\}}(\mathbf{v}) \right)
-		\]
-		
-		For a fixed scenario tuple $\mathbf{v} \in \Omega_S$, summing the indicators over all $u \in U$ counts exactly the number of distinct elements in the realized configuration $S^*(\mathbf{v})$:
-		\[
+	\]
+
+	For a fixed scenario tuple $\mathbf{v} \in \Omega_S$, summing the indicators over all $u \in U$ counts exactly the number of distinct elements in the realized configuration $S^*(\mathbf{v})$:
+	\[
 		\sum_{u \in U} \mathbb{I}_{\{u \in S^*(\mathbf{v})\}}(\mathbf{v}) = |S^*(\mathbf{v})|
-		\]
-		
-		Substituting this back into the summation completes the proof:
-		\[
+	\]
+
+	Substituting this back into the summation completes the proof:
+	\[
 		\sum_{u \in U} \mathcal{V}(u \in_u S) = \frac{1}{|\Omega_S|} \sum_{\mathbf{v} \in \Omega_S} |S^*(\mathbf{v})| = \mathbb{E}\left[\mathrm{ucard}(S)\right]
-		\]
-	\end{proof}
-	
-	\begin{thebibliography}{9}
-		\bibitem{tran2026extended}
-		Tran, M. C. (2026). \textit{Extended logic and mathematics of uncertainty}. Zenodo. DOI: \href{https://doi.org/10.5281/zenodo.22031881}{10.5281/zenodo.22031881}.
-		\bibitem{mu}
-		tmcuong2408. (2026). tmcuong2408/mu: \textit{Mathematics of Uncertainty Library (Version v0.2.0)} [Computer software]. Zenodo.
-		DOI: \href{https://doi.org/10.5281/zenodo.22051784}{10.5281/zenodo.22051784}
-	\end{thebibliography}
-	
+	\]
+\end{proof}
+
+\begin{thebibliography}{9}
+	\bibitem{tran2026extended}
+	Tran, M. C. (2026). \textit{Extended logic and mathematics of uncertainty}. Zenodo. DOI: \href{https://doi.org/10.5281/zenodo.22031881}{10.5281/zenodo.22031881}.
+	\bibitem{mu}
+	tmcuong2408. (2026). tmcuong2408/mu: \textit{Mathematics of Uncertainty Library (Version v0.2.0)} [Computer software]. Zenodo.
+	DOI: \href{https://doi.org/10.5281/zenodo.22051784}{10.5281/zenodo.22051784}
+\end{thebibliography}
+
 \end{document}
