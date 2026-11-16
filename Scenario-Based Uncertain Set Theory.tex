@@ -248,7 +248,30 @@
 		\sum_{u \in U} \mathcal{V}(u \in_u S) = \frac{1}{|\Omega_S|} \sum_{\mathbf{v} \in \Omega_S} |S^*(\mathbf{v})| = \mathbb{E}\left[\mathrm{ucard}(S)\right]
 	\]
 \end{proof}
+\chapter{Uncertain Mapping}
+\begin{definition}[Uncertain Mapping]
+	Let $A$ and $B$ be two non-empty uncertain sets on universal sets $U$ and $V$, respectively. An uncertain mapping (or uncertain function) $f$ from $A$ to $B$, denoted by $f : A \to B$, is a rule that assigns to each uncertain element $x \in A$ a unique uncertain element $y = f(x) \in B$.
+	Here, $A$ is called the {domain} of $f$, $B$ is called the {codomain} of $f$, and $f(x)$ is called the {image} of $x$ under $f$.
+\end{definition}
+\begin{example}[Independent Coin Tossing Mapping]
+	Consider tossing a fair coin twice, where $1$ represents heads and $0$ represents tails. Let $x$ be the uncertain element representing a single toss with possibility domain $\mathrm{Val}(x) = \{0, 1\}$, and let $A = \{x\}$ and $B = \{y\}$ be uncertain sets on $\mathbb{R}$.
+	
+	Define the uncertain mapping $f_1 : A \to B$ that maps $x \in A$ to $y = f_1(x) \in B$, where the possibility domain of $y$ is defined via the Minkowski sum:
+	\[
+	\mathrm{Val}(y) =  \{v_1 + v_2 : v_1, v_2 \in \mathrm{Val}(x)\} = \{0, 1, 2\}
+	\]
+	Thus, $f_1$ maps the single-toss uncertain element $x$ to the two-toss total uncertain element $y$ with $\mathrm{Val}(y) = \{0, 1, 2\}$.
+\end{example}
 
+\begin{example}[Scaled Single Coin Tossing Mapping]
+	Consider tossing a fair coin once, where $1$ represents heads and $0$ represents tails, and doubling the resulting score. Let $x$ be the uncertain element representing the single toss with possibility domain $\mathrm{Val}(x) = \{0, 1\}$, and let $A = \{x\}$ and $B = \{y\}$ be uncertain sets on $\mathbb{R}$.
+	
+	Define the uncertain mapping $f_2 : A \to B$ that maps $x \in A$ to $y = f_2(x) \in B$, where the possibility domain of $y$ is defined via:
+	\[
+	\mathrm{Val}(y) = \{2v : v \in \mathrm{Val}(x)\} = \{0, 2\}
+	\]
+	Thus, $f_2$ maps the single-toss uncertain element $x$ to the doubled-score uncertain element $y$ with $\mathrm{Val}(y) = \{0, 2\}$.
+\end{example}
 \begin{thebibliography}{9}
 	\bibitem{tran2026extended}
 	Tran, M. C. (2026). \textit{Extended Logic and Mathematics of Uncertainty}. Zenodo. DOI: \href{https://doi.org/10.5281/zenodo.22031881}{10.5281/zenodo.22031881}.
