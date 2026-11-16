@@ -272,6 +272,21 @@
 	\]
 	Thus, $f_2$ maps the single-toss uncertain element $x$ to the doubled-score uncertain element $y$ with $\mathrm{Val}(y) = \{0, 2\}$.
 \end{example}
+\begin{example}[Functional Equation Induced Uncertain Mapping]
+	Consider a classical functional relation $f : \mathbb{R} \to \mathbb{R}$ satisfying the identity:
+	\[
+	f(\sin x) = \cos x \quad \text{for all } x \in \mathbb{R}
+	\]
+	Let $a$ be an uncertain element representing a real solution to the trigonometric equation $\sin x = \frac{1}{2}$, whose possibility domain is the set of roots:
+	\[
+	\mathrm{Val}(a) = \left\{ x \in \mathbb{R} : \sin x = \frac{1}{2} \right\} = \left\{ \frac{\pi}{6} + 2k\pi, \; \frac{5\pi}{6} + 2k\pi : k \in \mathbb{Z} \right\}
+	\]
+	Let $A = \{a\}$ and $B = \{b\}$ be uncertain sets on $\mathbb{R}$, where $b$ represents the uncertain value $f\left(\frac{1}{2}\right)$ with possibility domain:
+	\[
+	\mathrm{Val}(b) = \{ f(\sin v) : v \in \mathrm{Val}(a) \} = \{ \cos v : v \in \mathrm{Val}(a) \} = \left\{ -\frac{\sqrt{3}}{2}, \; \frac{\sqrt{3}}{2} \right\}
+	\]
+	Then, the rule $F : A \to B$ assigning $a \in A$ to $b = F(a) \in B$ forms an uncertain mapping on $\mathbb{R}$, mapping the root-set uncertain element $a$ to the dual-valued uncertain element $b$ with $\mathrm{Val}(b) = \left\{ -\frac{\sqrt{3}}{2}, \frac{\sqrt{3}}{2} \right\}$.
+\end{example}
 \begin{thebibliography}{9}
 	\bibitem{tran2026extended}
 	Tran, M. C. (2026). \textit{Extended Logic and Mathematics of Uncertainty}. Zenodo. DOI: \href{https://doi.org/10.5281/zenodo.22031881}{10.5281/zenodo.22031881}.
