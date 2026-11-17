@@ -1,7 +1,7 @@
 \RequirePackage{silence}
 \WarningsOff % Turn off all warnings from all packages
 \ErrorsOff   % (Caution) Use only if you are sure the code has no severe logic errors
-\documentclass[a4paper,14pt, twoside]{memoir}
+\documentclass[a4paper,12pt, twoside]{memoir}
 \usepackage[utf8x]{inputenc}
 \usepackage[english]{babel}    
 \usepackage{url}
@@ -272,16 +272,28 @@
 	\]
 	Thus, $f_2$ maps the single-toss uncertain element $x$ to the doubled-score uncertain element $y$ with $\mathrm{Val}(y) = \{0, 2\}$.
 \end{example}
-\begin{example}[Cosine-Induced Uncertain Mapping]
-	Let $\alpha \in [-1, 1]$ be a fixed real parameter, and let $x$ be an uncertain element representing a real root of the trigonometric equation $\sin v = \alpha$, whose possibility domain is given by:
+\begin{example}[Functional Equation Induced Uncertain Mapping]
+	Consider a formal classical functional relation $f : [-1, 1] \to [-1, 1]$ satisfying the trigonometric identity:
 	\[
-	\mathrm{Val}(x) = \{ v \in \mathbb{R} : \sin v = \alpha \} = \{ \arcsin\alpha + 2k\pi, \; \pi - \arcsin\alpha + 2k\pi : k \in \mathbb{Z} \}
+	f(\sin x) = \cos x \quad \text{for all } x \in \mathbb{R}
 	\]
-	Let $A = \{x\}$ be an uncertain set on $\mathbb{R}$ and $B = \{y\}$ be an uncertain set on $[-1,1]$. Define the uncertain mapping $f_3 : A \to B$ that maps $x \in A$ to $y = f_3(x) \in B$, where the possibility domain of $y$ is induced by the cosine function:
+	In classical analysis, no single-valued function $f : [-1, 1] \to [-1, 1]$ satisfies this relation because $\sin x$ is non-injective on $\mathbb{R}$ (for instance, $x = \frac{\pi}{6}$ yields $f\left(\frac{1}{2}\right) = \frac{\sqrt{3}}{2}$, whereas $x = \frac{5\pi}{6}$ yields $f\left(\frac{1}{2}\right) = -\frac{\sqrt{3}}{2}$).
+	
+	To resolve this obstruction within Uncertain Set Theory, for each parameter $t \in [-1, 1]$, let $x_t$ be the uncertain element on $U = \mathbb{R}$ representing a real root of $\sin v = t$, whose possibility domain is the root-fiber:
 	\[
-	\mathrm{Val}(y) = \{ \cos a : a \in \mathrm{Val}(x) \} = \left\{ -\sqrt{1 - \alpha^2}, \; \sqrt{1 - \alpha^2} \right\}
+	\mathrm{Val}(x_t) = \{ v \in \mathbb{R} : \sin v = t \} = \{ \arcsin t + 2k\pi, \; \pi - \arcsin t + 2k\pi : k \in \mathbb{Z} \}
 	\]
-	Thus, $f_3$ collapses the countably infinite root-set uncertain element $x$ into the finite-valued uncertain element $y$ (which is dual-valued for $\alpha \in (-1, 1)$ and degenerates to $\{0\}$ when $\alpha = \pm 1$).
+	Since the correspondence $t \mapsto x_t$ forms a canonical bijection between $[-1, 1]$ and the family of root-fiber uncertain elements $\mathcal{X} = \{ x_t : t \in [-1, 1] \}$, we establish the contextual identification $t \equiv x_t$ via the embedding operator $\iota : [-1, 1] \to \mathcal{X}$ defined by $\iota(t) = x_t$.
+	
+	Let $\mathcal{Y} = \{ y_t : t \in [-1, 1] \}$ be an uncertain set on $V = [-1, 1]$, where each $y_t$ represents the uncertain image corresponding to $f(t)$ with possibility domain:
+	\[
+	\mathrm{Val}(y_t) = \{ \cos v : v \in \mathrm{Val}(x_t) \} = \left\{ -\sqrt{1 - t^2}, \; \sqrt{1 - t^2} \right\}
+	\]
+	Then, the rule $F : \mathcal{X} \to \mathcal{Y}$ assigning each $x_t \in \mathcal{X}$ to $y_t = F(x_t) \in \mathcal{Y}$ defines a valid single-valued uncertain mapping satisfying the lifted identity:
+	\[
+	F\big(\iota(\sin x_t)\big) = \cos(x_t) \quad \text{for all } t \in [-1, 1]
+	\]
+	In particular, for $t = \frac{1}{2}$, $F$ maps the countably infinite root-set uncertain element $x_{1/2}$ to the dual-valued uncertain element $y_{1/2}$ with $\mathrm{Val}(y_{1/2}) = \left\{ -\frac{\sqrt{3}}{2}, \; \frac{\sqrt{3}}{2} \right\}$, whereas at the boundary points $t = \pm 1$, $y_{\pm 1}$ degenerates to the classical constant $\{0\}$.
 \end{example}
 \begin{thebibliography}{9}
 	\bibitem{tran2026extended}
