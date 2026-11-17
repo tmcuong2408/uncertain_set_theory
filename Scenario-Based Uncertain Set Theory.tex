@@ -272,20 +272,16 @@
 	\]
 	Thus, $f_2$ maps the single-toss uncertain element $x$ to the doubled-score uncertain element $y$ with $\mathrm{Val}(y) = \{0, 2\}$.
 \end{example}
-\begin{example}[Functional Equation Induced Uncertain Mapping]
-	Consider a classical functional relation $f : [-1, 1] \to [-1, 1]$ satisfying the identity:
+\begin{example}[Cosine-Induced Uncertain Mapping]
+	Let $x$ be an uncertain element representing a real root of the trigonometric equation $\sin v = \frac{1}{2}$, whose possibility domain is given by:
 	\[
-	f(\sin x) = \cos x \quad \text{for all } x \in \mathbb{R}
+	\mathrm{Val}(x) = \left\{ v \in \mathbb{R} : \sin v = \frac{1}{2} \right\} = \left\{ \frac{\pi}{6} + 2k\pi, \; \frac{5\pi}{6} + 2k\pi : k \in \mathbb{Z} \right\}
 	\]
-	Let $a$ be an uncertain element representing a real solution to the trigonometric equation $\sin x = \frac{1}{2}$, whose possibility domain is the set of roots:
+	Let $A = \{x\}$ be an uncertain set on $\mathbb{R}$ and $B = \{y\}$ be an uncertain set on $[-1,1]$. Define the uncertain mapping $f_3 : A \to B$ that maps $x \in A$ to $y = f_3(x) \in B$, where the possibility domain of $y$ is induced by the cosine function:
 	\[
-	\mathrm{Val}(a) = \left\{ x \in \mathbb{R} : \sin x = \frac{1}{2} \right\} = \left\{ \frac{\pi}{6} + 2k\pi, \; \frac{5\pi}{6} + 2k\pi : k \in \mathbb{Z} \right\}
+	\mathrm{Val}(y) = \{ \cos a : a \in \mathrm{Val}(x) \} = \left\{ -\frac{\sqrt{3}}{2}, \; \frac{\sqrt{3}}{2} \right\}
 	\]
-	Let $A = \{a\}$ be an uncertain set on $\mathbb{R}$ and $B = \{b\}$ be an uncertain set on $[-1, 1]$, where $b$ represents the uncertain value $f\left(\frac{1}{2}\right)$ with possibility domain:
-	\[
-	\mathrm{Val}(b) = \{ f(\sin v) : v \in \mathrm{Val}(a) \} = \{ \cos v : v \in \mathrm{Val}(a) \} = \left\{ -\frac{\sqrt{3}}{2}, \; \frac{\sqrt{3}}{2} \right\}
-	\]
-	Then, the rule $F : A \to B$ assigning $a \in A$ to $b = F(a) \in B$ forms an uncertain mapping from $A$ to $B$, mapping the root-set uncertain element $a$ to the dual-valued uncertain element $b$ with $\mathrm{Val}(b) = \left\{ -\frac{\sqrt{3}}{2}, \frac{\sqrt{3}}{2} \right\}$.
+	Thus, $f_3$ collapses the countably infinite root-set uncertain element $x$ into the dual-valued uncertain element $y$ with $\mathrm{Val}(y) = \left\{ -\frac{\sqrt{3}}{2}, \frac{\sqrt{3}}{2} \right\}$.
 \end{example}
 \begin{thebibliography}{9}
 	\bibitem{tran2026extended}
