@@ -2,20 +2,27 @@
 \WarningsOff % Turn off all warnings from all packages
 \ErrorsOff   % (Caution) Use only if you are sure the code has no severe logic errors
 \documentclass[a4paper,12pt, twoside]{memoir}
-\usepackage[utf8x]{inputenc}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
 \usepackage[english]{babel}    
+
+% Cấu hình lề chuẩn và cân đối cho chế độ in hai mặt (twoside)
+\setlrmarginsandblock{3cm}{2.5cm}{*} % Lề gáy (inner) 3cm, lề ngoài (outer) 2.5cm
+\setulmarginsandblock{2.5cm}{2.5cm}{*} % Lề trên 2.5cm, lề dưới 2.5cm
+\checkandfixthelayout
+
 \usepackage{url}
 \usepackage{microtype}
-\usepackage{color}
+\usepackage{xcolor}
 \usepackage{amsmath}
 \usepackage{amsthm}         % Provides proof environment
 \usepackage{amssymb}
-\usepackage{mathtools}     % Includes amsmath but optimized and with more features
-\usepackage{hyperref}
+\usepackage{mathtools}      % Includes amsmath but optimized and with more features
 \usepackage{enumitem}
 \usepackage{autobreak}
 \usepackage{array}          % Support for notation table formatting
 \usepackage{booktabs}       % Professional table rules
+\usepackage[breaklinks=true]{hyperref} % Cho phép tự động ngắt dòng liên kết URL/DOI dài
 
 \hypersetup{
 	colorlinks=true,
@@ -23,6 +30,10 @@
 	filecolor=magenta,
 	urlcolor=cyan
 }
+
+% Cho phép LaTeX linh hoạt ngắt dòng các công thức inline khi gần sát lề phải
+\allowdisplaybreaks
+\emergencystretch=1.5em
 
 % Theorem Environments
 \newtheorem{definition}{Definition}[chapter]
@@ -49,10 +60,10 @@
 \DeclareMathOperator{\Conf}{Conf}
 
 % Custom commands
-\newcommand{\set}[1]{\left\{#1\right\}} % set
+\newcommand{\set}[1]{\{#1\}} % set
 \newcommand{\tbd}[1]{\mathcal{#1}} % uncertain set (styled uppercase)
-\newcommand{\s}[1]{\set{#1}_\mathrm{u}} % uncertain number / element
-\newcommand{\kbd}[1]{{#1}_\mathrm{u}} % uncertain element / interval
+\newcommand{\s}[1]{\{#1\}_\mathrm{u}} % uncertain number / element
+\newcommand{\kbd}[1]{{#1}_\mathrm{u}} % transfer operator from classical set to uncertain element
 \newcommand{\bd}[1]{\left(#1\right)_\mathrm{u}} % uncertain expression
 \newcommand{\tsbd}[1]{\mathbf{U}(\mathbb{#1})}
 \newcommand{\tsbdcapn}[2]{\mathbf{U^{#2}}(\mathbb{#1})}
@@ -84,7 +95,7 @@
 	\maketitle
 	
 	\begin{abstract}
-		This paper introduces Scenario-Based Uncertain Set Theory, a foundational mathematical framework built from first principles to model structural uncertainty without relying on a priori probability distributions, fuzzy membership grades, or static interval bounds \cite{tran2026extended}. Unlike classical Interval Arithmetic—which frequently suffers from dependency loss and numerical overestimation—our approach bridges classical possibility domains $X \subseteq U$ and Uncertain Elements $\kbd{X}$ via formal Transfer Operators, and constructs Uncertain Sets as styled-uppercase indexed families $\tbd{S} = \{(X_i)_\mathrm{u} : i \in I\}$.
+		This paper introduces Scenario-Based Uncertain Set Theory, a foundational mathematical framework built from first principles to model structural uncertainty without relying on a priori probability distributions, fuzzy membership grades, or static interval bounds \cite{tran2026extended}. Unlike classical Interval Arithmetic—which frequently suffers from dependency loss and numerical overestimation—our approach bridges classical possibility domains $D \subseteq U$ and Uncertain Elements $X$ via formal Transfer Operators, and constructs Uncertain Sets as styled-uppercase indexed families $\tbd{S} = \{X_i : i \in I\}$.
 		
 		Through this scenario-based formulation, every uncertain set $\tbd{S}$ canonically induces a Configuration Space $\mathrm{Conf}(\tbd{S})$ of realized classical sets. Consequently, set cardinality naturally generalizes to an uncertain number $\UCARD(\tbd{S}) = \s{|S^*| : S^* \in \mathrm{Conf}(\tbd{S})}$, seamlessly capturing state-collapse phenomena when distinct uncertain elements realize identical values. By equipping the global Cartesian scenario space $\Omega_{\tbd{S}}$ with a normalized product measure, we establish a rigorous truth valuation $\mathcal{V}(u \in_u \tbd{S}) \in [0, 1]$ for element membership and prove the Conservation of Total Membership Valuation theorem, showing that $\sum_{u \in U} \mathcal{V}(u \in_u \tbd{S}) = \mathbb{E}[\UCARD(\tbd{S})]$. Finally, we extend the framework to Uncertain Mappings $f : \tbd{A} \to \tbd{B}$, demonstrating how fiber-based uncertain lifting resolves non-injective obstructions in classical functional equations.
 		
@@ -95,39 +106,42 @@
 	\chapter{Uncertain Sets}
 	
 	\begin{definition}[Uncertain Element]
-		Let $U$ be a non-empty universal set. An uncertain element $\kbd{X}$ on $U$ is an object whose exact value in $U$ is undetermined, associated with a non-empty classical set of possible values (possibility domain or state space):
-		\[
-		X \subseteq U, \quad X \neq \emptyset
-		\]
-		Each realized state of $\kbd{X}$ is a classical element $v \in X$.
+		Let $U$ be a non-empty universal set. An uncertain element $X$ on $U$ is an object whose exact value in $U$ is undetermined, associated with a non-empty classical possibility domain (or state space) in $U$. Each realized state of $X$ is a classical element $v \in X$.
 	\end{definition}
 	
 	\begin{definition}[Transfer Operator]
-		To resolve notation ambiguity between classical sets and uncertain elements in certain contexts, we define the following two transfer operators consistent with \cite{tran2026extended}:
+		To resolve notation ambiguity between classical sets and uncertain elements when switching representations, we define the following two transfer operators consistent with \cite{tran2026extended}:
 		\begin{enumerate}[leftmargin=*]
-			\item Given an uncertain element $\kbd{X}$ on $U$, we denote $(\kbd{X})_s$ (or simply $X_s$) as the classical set containing all possible realized values of $\kbd{X}$.
-			\item Given $X \subseteq U$ as a non-empty classical set, the operator transforming $X$ into an uncertain element on $U$ is denoted by $\kbd{X}$.
+			\item Given an uncertain element $X$ on $U$, we denote $(X)_s$ (or simply $X_s$) as the classical set containing all possible realized values of $X$.
+			\item Given a non-empty classical set $D \subseteq U$, the operator transforming $D$ into an uncertain element on $U$ is denoted by $\kbd{D}$.
 		\end{enumerate}
+	\end{definition}
+	
+	\begin{definition}[Degenerate Uncertain Element]
+		For any classical element $a \in U$, the singleton uncertain element $\s{a}$ (whose possibility domain is the singleton $\{a\}$) is canonically identified with the classical element $a$ itself:
+		\[
+		\s{a} \equiv a
+		\]
 	\end{definition}
 	
 	\begin{definition}[Uncertain Set]
 		Let $U$ be a non-empty universal set and $I$ be an index set. An uncertain set $\tbd{S}$ on $U$ is an indexed family of uncertain elements on $U$:
 		\[
-		\tbd{S} = \{(X_i)_\mathrm{u} : i \in I\}
+		\tbd{S} = \{X_i : i \in I\}
 		\]
-		where each uncertain element $(X_i)_\mathrm{u}$ ($i \in I$) corresponds to a non-empty possibility domain $X_i \subseteq U$.
+		where each uncertain element $X_i$ ($i \in I$) takes realized values in $U$.
 	\end{definition}
 	
 	\begin{definition}[Configuration Space]
-		Let $\tbd{S} = \{(X_i)_\mathrm{u} : i \in I\}$ be an uncertain set on $U$. A realized configuration (or empirical state) of $\tbd{S}$ is a classical set $S^* \subseteq U$ obtained when all constituent uncertain elements $(X_i)_\mathrm{u}$ simultaneously realize specific values $v_i \in X_i$:
+		Let $\tbd{S} = \{X_i : i \in I\}$ be an uncertain set on $U$. A realized configuration (or empirical state) of $\tbd{S}$ is a classical set $S^* \subseteq U$ obtained when all constituent uncertain elements $X_i$ simultaneously realize specific values $v_i \in X_i$:
 		\[
 		S^* = \{v_i : i \in I\}
 		\]
 		The collection of all classical sets realized by $\tbd{S}$ is called the configuration space of $\tbd{S}$, denoted by $\mathrm{Conf}(\tbd{S})$.
 	\end{definition}
-		
+	
 	\begin{definition}[Uncertain Cardinality]
-		Let $\tbd{S} = \{(X_i)_\mathrm{u} : i \in I\}$ be an uncertain set on $U$. The uncertain cardinality (or size) of $\tbd{S}$, denoted by $\UCARD(\tbd{S})$, is an uncertain number on $\mathbb{N}$ consisting of the classical cardinalities of all realized states in its configuration space $\mathrm{Conf}(\tbd{S})$:
+		Let $\tbd{S} = \{X_i : i \in I\}$ be an uncertain set on $U$. The uncertain cardinality (or size) of $\tbd{S}$, denoted by $\UCARD(\tbd{S})$, is an uncertain number on $\mathbb{N}$ consisting of the classical cardinalities of all realized states in its configuration space $\mathrm{Conf}(\tbd{S})$:
 		\[
 		\UCARD(\tbd{S}) = \s{ \mathrm{card}(S^*) : S^* \in \mathrm{Conf}(\tbd{S}) }
 		\]
@@ -135,18 +149,18 @@
 	\end{definition}
 	
 	\begin{remark}
-		If all uncertain elements $(X_i)_\mathrm{u} \in \tbd{S}$ take mutually distinct values across all realized configurations, then $|S^*| = |I|$ for every $S^* \in \mathrm{Conf}(\tbd{S})$, in which case the uncertain cardinality degenerates into a classical singleton constant $\UCARD(\tbd{S}) = \s{|I|}$. Conversely, cardinality degeneration (state collapse) occurs at configurations $S^*$ where duplicate values appear ($v_i = v_j$ for some $i \neq j$).
+		If all uncertain elements $X_i \in \tbd{S}$ take mutually distinct values across all realized configurations, then $|S^*| = |I|$ for every $S^* \in \mathrm{Conf}(\tbd{S})$, in which case the uncertain cardinality degenerates into a classical singleton constant $\UCARD(\tbd{S}) = \s{|I|} \equiv |I|$. Conversely, cardinality degeneration (state collapse) occurs at configurations $S^*$ where duplicate values appear ($v_i = v_j$ for some $i \neq j$).
 	\end{remark}
 	
 	\begin{example}[Numerical Illustration of Configuration Space and Uncertain Cardinality]
-		Consider the universal set $U = \mathbb{R}$. Let $(X_1)_\mathrm{u}$ and $(X_2)_\mathrm{u}$ be two uncertain elements given by:
+		Consider the universal set $U = \mathbb{R}$. Let $X_1$ and $X_2$ be two uncertain elements given by:
 		\[
-		(X_1)_\mathrm{u} = \s{1, 2}, \quad (X_2)_\mathrm{u} = \s{1, 3}
+		X_1 = \s{1, 2}, \quad X_2 = \s{1, 3}
 		\]
-		Let $\tbd{S} = \{(X_1)_\mathrm{u}, (X_2)_\mathrm{u}\}$ be an uncertain set.
+		Let $\tbd{S} = \{X_1, X_2\}$ be an uncertain set.
 		
-		Assuming $(X_1)_\mathrm{u}$ and $(X_2)_\mathrm{u}$ vary independently, the joint scenario space yields $2 \times 2 = 4$ realized classical configurations:
-		\begin{itemize}
+		Assuming $X_1$ and $X_2$ vary independently, the joint scenario space yields $2 \times 2 = 4$ realized classical configurations:
+		\begin{itemize}[leftmargin=*]
 			\item $v_1 = 1, v_2 = 1 \implies S_1^* = \{1, 1\} = \{1\}$, with $|S_1^*| = \mathrm{card}(S_1^*) = 1$.
 			\item $v_1 = 1, v_2 = 3 \implies S_2^* = \{1, 3\}$, with $|S_2^*| = \mathrm{card}(S_2^*) = 2$.
 			\item $v_1 = 2, v_2 = 1 \implies S_3^* = \{2, 1\}$, with $|S_3^*| = \mathrm{card}(S_3^*) = 2$.
@@ -164,11 +178,11 @@
 	\end{example}
 	
 	\begin{definition}[Element Membership Valuation via Scenario Measure]
-		Let $\tbd{S} = \{(X_1)_\mathrm{u}, (X_2)_\mathrm{u}, \dots, (X_n)_\mathrm{u}\}$ be an uncertain set on a non-empty universe $U$, where each uncertain element $(X_i)_\mathrm{u}$ varies independently over its possibility domain $X_i \subseteq U$.
+		Let $\tbd{S} = \{X_1, X_2, \dots, X_n\}$ be an uncertain set on a non-empty universe $U$, where each uncertain element $X_i$ varies independently over its possibility domain $(X_i)_s \subseteq U$.
 		
 		The global scenario space of $\tbd{S}$ is the Cartesian product:
 		\[
-		\Omega_{\tbd{S}} = X_1 \times X_2 \times \dots \times X_n
+		\Omega_{\tbd{S}} = (X_1)_s \times (X_2)_s \times \dots \times (X_n)_s
 		\]
 		equipped with a product measure $\lambda$. Each state tuple $\mathbf{v} = (v_1, \dots, v_n) \in \Omega_{\tbd{S}}$ uniquely induces a realized configuration $S^*(\mathbf{v}) = \{v_1, \dots, v_n\} \in \mathrm{Conf}(\tbd{S})$.
 		
@@ -183,11 +197,11 @@
 	\end{definition}
 	
 	\begin{example}[Numerical Illustration of Membership Valuation]
-		Consider $U = \mathbb{R}$ and independent uncertain elements $(X_1)_\mathrm{u}, (X_2)_\mathrm{u}$:
+		Consider $U = \mathbb{R}$ and independent uncertain elements $X_1, X_2$:
 		\[
-		(X_1)_\mathrm{u} = \s{1, 3, 5, 7}, \quad (X_2)_\mathrm{u} = \s{2, 3, 4, 5}
+		X_1 = \s{1, 3, 5, 7}, \quad X_2 = \s{2, 3, 4, 5}
 		\]
-		Let $\tbd{S} = \{(X_1)_\mathrm{u}, (X_2)_\mathrm{u}\}$. The joint scenario space is $\Omega_{\tbd{S}} = X_1 \times X_2 = \{1, 3, 5, 7\} \times \{2, 3, 4, 5\}$. Equipping $\Omega_{\tbd{S}}$ with the counting measure $\lambda$, the total measure is $\lambda(\Omega_{\tbd{S}}) = 4 \times 4 = 16$.
+		Let $\tbd{S} = \{X_1, X_2\}$. The joint scenario space is $\Omega_{\tbd{S}} = (X_1)_s \times (X_2)_s = \{1, 3, 5, 7\} \times \{2, 3, 4, 5\}$. Equipping $\Omega_{\tbd{S}}$ with the counting measure $\lambda$, the total measure is $\lambda(\Omega_{\tbd{S}}) = 4 \times 4 = 16$.
 		
 		The 16 state tuples $\mathbf{v} = (v_1, v_2) \in \Omega_{\tbd{S}}$ and their realized configurations $S^*(\mathbf{v})$ are:
 		\begin{align*}
@@ -207,7 +221,7 @@
 	\end{example}
 	
 	\begin{theorem}[Conservation of Total Membership Valuation]
-		Let $U$ be a non-empty universal set and let $\tbd{S} = \{(X_1)_\mathrm{u}, (X_2)_\mathrm{u}, \dots, (X_n)_\mathrm{u}\}$ be an uncertain set consisting of $n$ finite uncertain elements $(X_i)_\mathrm{u}$ with $X_i \subseteq U$.
+		Let $U$ be a non-empty universal set and let $\tbd{S} = \{X_1, X_2, \dots, X_n\}$ be an uncertain set consisting of $n$ finite uncertain elements $X_i$ on $U$.
 		
 		Then, the sum of the membership truth valuations of all elements $u \in U$ equals the expected value of the uncertain cardinality $\UCARD(\tbd{S})$ over the finite scenario space $\Omega_{\tbd{S}}$:
 		\[
@@ -221,7 +235,7 @@
 	\end{theorem}
 	
 	\begin{proof}
-		By Definition 1.7, for each element $u \in U$, the truth valuation of $u \in_u \tbd{S}$ under the counting measure is:
+		By Definition 1.8, for each element $u \in U$, the truth valuation of $u \in_u \tbd{S}$ under the counting measure is:
 		\[
 		\mathcal{V}(u \in_u \tbd{S}) = \frac{|E_u|}{|\Omega_{\tbd{S}}|}
 		\]
@@ -255,28 +269,28 @@
 	
 	\chapter{Uncertain Mapping}
 	\begin{definition}[Uncertain Mapping]
-		Let $\tbd{A}$ and $\tbd{B}$ be two non-empty uncertain sets on universal sets $U$ and $V$, respectively. An uncertain mapping (or uncertain function) $f$ from $\tbd{A}$ to $\tbd{B}$, denoted by $f : \tbd{A} \to \tbd{B}$, is a rule that assigns to each uncertain element $\kbd{X} \in \tbd{A}$ a unique uncertain element $\kbd{Y} = f(\kbd{X}) \in \tbd{B}$.
-		Here, $\tbd{A}$ is called the {domain} of $f$, $\tbd{B}$ is called the {codomain} of $f$, and $f(\kbd{X})$ is called the {image} of $\kbd{X}$ under $f$.
+		Let $\tbd{A}$ and $\tbd{B}$ be two non-empty uncertain sets on universal sets $U$ and $V$, respectively. An uncertain mapping (or uncertain function) $f$ from $\tbd{A}$ to $\tbd{B}$, denoted by $f : \tbd{A} \to \tbd{B}$, is a rule that assigns to each uncertain element $X \in \tbd{A}$ a unique uncertain element $Y = f(X) \in \tbd{B}$.
+		Here, $\tbd{A}$ is called the \emph{domain} of $f$, $\tbd{B}$ is called the \emph{codomain} of $f$, and $f(X)$ is called the \emph{image} of $X$ under $f$.
 	\end{definition}
 	
 	\begin{example}[Independent Coin Tossing Mapping]
-		Consider tossing a fair coin twice, where $1$ represents heads and $0$ represents tails. Let $\kbd{X} = \s{0, 1}$ be the uncertain element representing a single toss, and let $\tbd{A} = \{\kbd{X}\}$ and $\tbd{B} = \{\kbd{Y}\}$ be uncertain sets on $\mathbb{R}$.
+		Consider tossing a fair coin twice, where $1$ represents heads and $0$ represents tails. Let $X = \s{0, 1}$ be the uncertain element representing a single toss, and let $\tbd{A} = \{X\}$ and $\tbd{B} = \{Y\}$ be uncertain sets on $\mathbb{R}$.
 		
-		Define the uncertain mapping $f_1 : \tbd{A} \to \tbd{B}$ that maps $\kbd{X} \in \tbd{A}$ to $\kbd{Y} = f_1(\kbd{X}) \in \tbd{B}$, where $\kbd{Y}$ is defined via the Minkowski sum:
+		Define the uncertain mapping $f_1 : \tbd{A} \to \tbd{B}$ that maps $X \in \tbd{A}$ to $Y = f_1(X) \in \tbd{B}$, where $Y$ is defined via the Minkowski sum:
 		\[
-		\kbd{Y} = \s{v_1 + v_2 : v_1, v_2 \in X} = \s{0, 1, 2}
+		Y = \s{v_1 + v_2 : v_1, v_2 \in X} = \s{0, 1, 2}
 		\]
-		Thus, $f_1$ maps the single-toss uncertain element $\kbd{X}$ to the two-toss total uncertain element $\kbd{Y} = \s{0, 1, 2}$.
+		Thus, $f_1$ maps the single-toss uncertain element $X$ to the two-toss total uncertain element $Y = \s{0, 1, 2}$.
 	\end{example}
 	
 	\begin{example}[Scaled Single Coin Tossing Mapping]
-		Consider tossing a fair coin once, where $1$ represents heads and $0$ represents tails, and doubling the resulting score. Let $\kbd{X} = \s{0, 1}$ be the uncertain element representing the single toss, and let $\tbd{A} = \{\kbd{X}\}$ and $\tbd{B} = \{\kbd{Y}\}$ be uncertain sets on $\mathbb{R}$.
+		Consider tossing a fair coin once, where $1$ represents heads and $0$ represents tails, and doubling the resulting score. Let $X = \s{0, 1}$ be the uncertain element representing the single toss, and let $\tbd{A} = \{X\}$ and $\tbd{B} = \{Y\}$ be uncertain sets on $\mathbb{R}$.
 		
-		Define the uncertain mapping $f_2 : \tbd{A} \to \tbd{B}$ that maps $\kbd{X} \in \tbd{A}$ to $\kbd{Y} = f_2(\kbd{X}) \in \tbd{B}$, where $\kbd{Y}$ is defined via:
+		Define the uncertain mapping $f_2 : \tbd{A} \to \tbd{B}$ that maps $X \in \tbd{A}$ to $Y = f_2(X) \in \tbd{B}$, where $Y$ is defined via:
 		\[
-		\kbd{Y} = \s{2v : v \in X} = \s{0, 2}
+		Y = \s{2v : v \in X} = \s{0, 2}
 		\]
-		Thus, $f_2$ maps the single-toss uncertain element $\kbd{X}$ to the doubled-score uncertain element $\kbd{Y} = \s{0, 2}$.
+		Thus, $f_2$ maps the single-toss uncertain element $X$ to the doubled-score uncertain element $Y = \s{0, 2}$.
 	\end{example}
 	
 	\begin{example}[Functional Equation Induced Uncertain Mapping]
@@ -284,23 +298,28 @@
 		\[
 		f(\sin x) = \cos x \quad \text{for all } x \in \mathbb{R}
 		\]
-		In classical analysis, no single-valued function $f : [-1, 1] \to [-1, 1]$ satisfies this relation because $\sin x$ is non-injective on $\mathbb{R}$ (for instance, $x = \frac{\pi}{6}$ yields $f\left(\frac{1}{2}\right) = \frac{\sqrt{3}}{2}$, whereas $x = \frac{5\pi}{6}$ yields $f\left(\frac{1}{2}\right) = -\frac{\sqrt{3}}{2}$).
+		In classical analysis, no single-valued function $f : [-1, 1] \to [-1, 1]$ satisfies this relation because $\sin x$ is non-injective on $\mathbb{R}$ (for instance, $x = \frac{\pi}{6}$ yields $f(\frac{1}{2}) = \frac{\sqrt{3}}{2}$, whereas $x = \frac{5\pi}{6}$ yields $f(\frac{1}{2}) = -\frac{\sqrt{3}}{2}$).
 		
-		To resolve this obstruction within Uncertain Set Theory, for each parameter $t \in [-1, 1]$, let $(X_t)_\mathrm{u}$ be the uncertain element on $U = \mathbb{R}$ obtained by applying the transfer operator to the root-fiber $X_t = \{ v \in \mathbb{R} : \sin v = t \}$:
-		\[
-		(X_t)_\mathrm{u} = \s{ v \in \mathbb{R} : \sin v = t } = \s{ \arcsin t + 2k\pi, \; \pi - \arcsin t + 2k\pi : k \in \mathbb{Z} }
-		\]
-		Since the correspondence $t \mapsto (X_t)_\mathrm{u}$ forms a canonical bijection between $[-1, 1]$ and the family of root-fiber uncertain elements $\tbd{X} = \{ (X_t)_\mathrm{u} : t \in [-1, 1] \}$, we establish the contextual identification $t \equiv (X_t)_\mathrm{u}$ via the embedding operator $\iota : [-1, 1] \to \tbd{X}$ defined by $\iota(t) = (X_t)_\mathrm{u}$.
+		To resolve this obstruction within Uncertain Set Theory, for each parameter $t \in [-1, 1]$, let $X_t$ be the uncertain element on $U = \mathbb{R}$ obtained by applying the transfer operator to the classical root-fiber $R_t = \{ v \in \mathbb{R} : \sin v = t \}$:
+		\begin{align*}
+			X_t = (R_t)_\mathrm{u} &= \big\{ v \in \mathbb{R} : \sin v = t \big\}_\mathrm{u} \\
+			&= \big\{ \arcsin t + 2k\pi, \; \pi - \arcsin t + 2k\pi : k \in \mathbb{Z} \big\}_\mathrm{u}
+		\end{align*}
+		Since the correspondence $t \mapsto X_t$ forms a canonical bijection between $[-1, 1]$ and the family of root-fiber uncertain elements $\tbd{X} = \{ X_t : t \in [-1, 1] \}$, we establish the contextual identification $t \equiv X_t$ via the embedding operator $\iota : [-1, 1] \to \tbd{X}$ defined by $\iota(t) = X_t$.
 		
-		Let $\tbd{Y} = \{ (Y_t)_\mathrm{u} : t \in [-1, 1] \}$ be an uncertain set on $V = [-1, 1]$, where each $(Y_t)_\mathrm{u}$ is the uncertain image element corresponding to $(X_t)_\mathrm{u}$:
+		By point-wise uncertain extension of trigonometric functions on $X_t$, we define:
 		\[
-		(Y_t)_\mathrm{u} = \s{ \cos v : v \in X_t } = \s{ -\sqrt{1 - t^2}, \; \sqrt{1 - t^2} }
+		\sin X_t := \big\{ \sin x_t : x_t \in X_t \big\}_\mathrm{u} = \s{t} \equiv t, \quad \cos X_t := \big\{ \cos x_t : x_t \in X_t \big\}_\mathrm{u}
 		\]
-		Then, the rule $F : \tbd{X} \to \tbd{Y}$ assigning each $(X_t)_\mathrm{u} \in \tbd{X}$ to $(Y_t)_\mathrm{u} = F\big((X_t)_\mathrm{u}\big) \in \tbd{Y}$ defines a valid single-valued uncertain mapping satisfying the lifted identity:
+		Let $\tbd{Y} = \{ Y_t : t \in [-1, 1] \}$ be an uncertain set on $V = [-1, 1]$, where each $Y_t = \cos X_t$ is the uncertain image element corresponding to $X_t$:
 		\[
-		F\big(\iota(\sin (X_t)_\mathrm{u})\big) = \cos (X_t)_\mathrm{u} \quad \text{for all } t \in [-1, 1]
+		Y_t = \cos X_t = \big\{ -\sqrt{1 - t^2}, \; \sqrt{1 - t^2} \big\}_\mathrm{u}
 		\]
-		In particular, for $t = \frac{1}{2}$, $F$ maps the countably infinite root-set uncertain element $(X_{1/2})_\mathrm{u}$ to the dual-valued uncertain element $(Y_{1/2})_\mathrm{u} = \s{ -\frac{\sqrt{3}}{2}, \; \frac{\sqrt{3}}{2} }$, whereas at the boundary points $t = \pm 1$, $(Y_{\pm 1})_\mathrm{u}$ degenerates to the classical singleton constant $\s{0}$.
+		Then, the rule $F : \tbd{X} \to \tbd{Y}$ assigning each $X_t \in \tbd{X}$ to $Y_t = F(X_t) \in \tbd{Y}$ defines a valid single-valued uncertain mapping satisfying the lifted identity:
+		\[
+		F\big(\iota(\sin X_t)\big) = \cos X_t \quad \text{for all } t \in [-1, 1]
+		\]
+		In particular, for $t = \frac{1}{2}$, $F$ maps the countably infinite root-set uncertain element $X_{1/2}$ to the dual-valued uncertain element $Y_{1/2} = \big\{ -\frac{\sqrt{3}}{2}, \; \frac{\sqrt{3}}{2} \big\}_\mathrm{u}$, whereas at the boundary points $t = \pm 1$, $Y_{\pm 1}$ degenerates to the classical singleton constant $\s{0} \equiv 0$.
 	\end{example}
 	
 	\begin{thebibliography}{9}
