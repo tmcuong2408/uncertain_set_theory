@@ -283,6 +283,23 @@
 	\]
 	Thus, $f_3$ collapses the countably infinite root-set uncertain element $x$ into the dual-valued uncertain element $y$ with $\mathrm{Val}(y) = \left\{ -\frac{\sqrt{3}}{2}, \frac{\sqrt{3}}{2} \right\}$.
 \end{example}
+\begin{example}[Uncertain Solution to a Classically Inconsistent Functional Equation]
+	Consider the trigonometric functional equation:
+	\[
+	f(\sin x) = \cos x \quad \text{for all } x \in \mathbb{R}
+	\]
+	In classical analysis, this equation admits no single-valued function $f : [-1, 1] \to [-1, 1]$, since $\sin(\pi - x) = \sin x$ while $\cos(\pi - x) = -\cos x$, forcing a single input in $(-1, 1)$ to take two opposite outputs.
+	
+	Within Uncertain Set Theory, we resolve this multi-valuedness globally. For each $t \in [-1, 1]$, let $x_t$ be an uncertain element representing a real root of $\sin v = t$, with possibility domain:
+	\[
+	\mathrm{Val}(x_t) = \{ v \in \mathbb{R} : \sin v = t \}
+	\]
+	and let $y_t$ be the corresponding uncertain element on $[-1, 1]$ defined via the cosine image:
+	\[
+	\mathrm{Val}(y_t) = \{ \cos a : a \in \mathrm{Val}(x_t) \} = \left\{ -\sqrt{1 - t^2}, \; \sqrt{1 - t^2} \right\}
+	\]
+	Let $A = \{x_t : t \in [-1, 1]\}$ be an uncertain set on $\mathbb{R}$ and $B = \{y_t : t \in [-1, 1]\}$ be an uncertain set on $[-1, 1]$. Then, the uncertain mapping $F : A \to B$ defined by $F(x_t) = y_t$ serves as an exact global uncertain solution to the functional equation, collapsing to singleton domains at the endpoints ($\mathrm{Val}(y_{\pm 1}) = \{0\}$) and maintaining dual-valued uncertainty on $(-1, 1)$ (for instance, $\mathrm{Val}(y_{1/2}) = \left\{-\frac{\sqrt{3}}{2}, \frac{\sqrt{3}}{2}\right\}$).
+\end{example}
 \begin{thebibliography}{9}
 	\bibitem{tran2026extended}
 	Tran, M. C. (2026). \textit{Extended Logic and Mathematics of Uncertainty}. Zenodo. DOI: \href{https://doi.org/10.5281/zenodo.22031881}{10.5281/zenodo.22031881}.
