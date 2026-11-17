@@ -84,12 +84,12 @@
 \maketitle
 
 \begin{abstract}
-	This paper establishes Uncertain Set Theory, a novel foundational mathematical framework built from First Principles to model uncertainty without relying on probabilistic distributions, fuzzy membership degrees, or static interval bounds. Traditional approaches such as Interval Arithmetic frequently suffer from correlation loss and catastrophic numerical noise explosion, while probabilistic models require prior knowledge of probability densities that are often unavailable in real-world high-noise environments \cite{tran2026extended}.
-
-	We address these fundamental limitations by defining Uncertain Elements and Uncertain Sets directly as collections of state-dependent uncertain entities $S = \{x_i : i \in I\}$. Through this scenario-based structural formulation, we show that every uncertain set canonically induces a Configuration Space $\mathrm{Conf}(S)$, allowing set cardinality itself to unify naturally as an uncertain number $\mathrm{ucard}(S) \in \mathbf{U}(\mathbb{N})$, resolving cardinality degeneration and state-collapse seamlessly. Furthermore, algebraic operations on uncertain sets inherit classical binary set relations over their configuration spaces, preserving absolute logical correlation and enabling canonical complexity reduction down to $\mathcal{O}(1)$ via Lazy Evaluation. This framework serves as the core foundation for $\mathbf{U}(\mathbb{K})$ arithmetic, scenario-space optimization, and high-dimensional uncertain topology.
-
+	This paper introduces Scenario-Based Uncertain Set Theory, a foundational mathematical framework built from first principles to model structural uncertainty without relying on a priori probability distributions, fuzzy membership grades, or static interval bounds \cite{tran2026extended}. Unlike classical Interval Arithmetic—which frequently suffers from dependency loss and numerical overestimation—our approach defines Uncertain Elements directly through their possibility domains $\mathrm{Val}(x) \subseteq U$ and constructs Uncertain Sets as indexed families $S = \{x_i : i \in I\}$.
+	
+	Through this scenario-based formulation, every uncertain set canonically induces a Configuration Space $\mathrm{Conf}(S)$ of realized classical sets. Consequently, set cardinality naturally generalizes to an uncertain number $\mathrm{ucard}(S)$ on $\mathbb{N}$, seamlessly capturing state-collapse phenomena when distinct elements realize identical values. By equipping the global Cartesian scenario space $\Omega_S$ with a normalized product measure, we establish a rigorous truth valuation $\mathcal{V}(u \in_u S) \in [0, 1]$ for element membership and prove the Conservation of Total Membership Valuation theorem, showing that $\sum_{u \in U} \mathcal{V}(u \in_u S) = \mathbb{E}[\mathrm{ucard}(S)]$. Finally, we extend the framework to Uncertain Mappings $f : A \to B$, demonstrating how fiber-based uncertain lifting resolves non-injective obstructions in classical functional equations.
+	
 	\vspace{1em}
-	\noindent Keywords: Uncertain Set Theory, Uncertain Elements, Configuration Space, State Superposition, Uncertain Cardinality, Scenario Space, Scenario-Based Arithmetic, Correlation Loss, $\mathbf{U}(\mathbb{K})$ Spaces, First Principles.
+	\noindent \textbf{Keywords:} Uncertain Set Theory, Uncertain Elements, Configuration Space, Uncertain Cardinality, Scenario Space, Membership Valuation, Uncertain Mapping, First Principles.
 \end{abstract}
 
 \chapter{Uncertain Sets}
@@ -285,13 +285,13 @@
 	\]
 	Since the correspondence $t \mapsto x_t$ forms a canonical bijection between $[-1, 1]$ and the family of root-fiber uncertain elements $\mathcal{X} = \{ x_t : t \in [-1, 1] \}$, we establish the contextual identification $t \equiv x_t$ via the embedding operator $\iota : [-1, 1] \to \mathcal{X}$ defined by $\iota(t) = x_t$.
 	
-	Let $\mathcal{Y} = \{ y_t : t \in [-1, 1] \}$ be an uncertain set on $V = [-1, 1]$, where each $y_t$ represents the uncertain image corresponding to $f(t)$ with possibility domain:
+	Let $\mathcal{Y} = \{ y_t : t \in [-1, 1] \}$ be an uncertain set on $V = [-1, 1]$, where each $y_t$ represents the uncertain image corresponding to $x_t$ with possibility domain:
 	\[
 	\mathrm{Val}(y_t) = \{ \cos v : v \in \mathrm{Val}(x_t) \} = \left\{ -\sqrt{1 - t^2}, \; \sqrt{1 - t^2} \right\}
 	\]
 	Then, the rule $F : \mathcal{X} \to \mathcal{Y}$ assigning each $x_t \in \mathcal{X}$ to $y_t = F(x_t) \in \mathcal{Y}$ defines a valid single-valued uncertain mapping satisfying the lifted identity:
 	\[
-	F\big(\iota(\sin x_t)\big) = \cos(x_t) \quad \text{for all } t \in [-1, 1]
+	F\big(\iota(\sin x_t)\big) = \cos x_t \quad \text{for all } t \in [-1, 1]
 	\]
 	In particular, for $t = \frac{1}{2}$, $F$ maps the countably infinite root-set uncertain element $x_{1/2}$ to the dual-valued uncertain element $y_{1/2}$ with $\mathrm{Val}(y_{1/2}) = \left\{ -\frac{\sqrt{3}}{2}, \; \frac{\sqrt{3}}{2} \right\}$, whereas at the boundary points $t = \pm 1$, $y_{\pm 1}$ degenerates to the classical constant $\{0\}$.
 \end{example}
