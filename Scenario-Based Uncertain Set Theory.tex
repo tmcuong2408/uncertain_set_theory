@@ -372,6 +372,34 @@
 		\]
 		which completes the proof.
 	\end{proof}
+	\begin{example}[Stochastic Sensor Channel Induced Uncertain Mapping]
+		Consider a noisy communication channel modeled by the finite probability space $(\Omega, \mathcal{F}, P)$ consisting of $6$ equally likely scenarios $\Omega = \{\omega_1, \omega_2, \omega_3, \omega_4, \omega_5, \omega_6\}$, where $P(\{\omega_k\}) = \frac{1}{6}$ for all $k \in \{1, \dots, 6\}$.
+		
+		Let $\xi : \Omega \to \mathbb{R}$ represent the transmitted signal (input observable) and $\eta : \Omega \to \mathbb{R}$ represent the received distorted signal (output observable), defined across the scenarios as follows:
+		\begin{align*}
+			\xi(\omega_1) = 1, \quad \xi(\omega_2) = 1, \quad \xi(\omega_3) = 2, \quad \xi(\omega_4) = 2, \quad \xi(\omega_5) = 2, \quad \xi(\omega_6) = 3 \\
+			\eta(\omega_1) = 10, \quad \eta(\omega_2) = 20, \quad \eta(\omega_3) = 20, \quad \eta(\omega_4) = 20, \quad \eta(\omega_5) = 30, \quad \eta(\omega_6) = 30
+		\end{align*}
+		
+		Consider the partition $\mathcal{P} = \{\Omega_1, \Omega_2\}$ of $\Omega$ into two coarse-grained operating regimes:
+		\[
+		\Omega_1 = \{\omega_1, \omega_2\}, \qquad \Omega_2 = \{\omega_3, \omega_4, \omega_5, \omega_6\}
+		\]
+		Applying the scenario projection yields the input and output uncertain elements:
+		\begin{align*}
+			X_1 &= \big\{ \xi(\omega) : \omega \in \Omega_1 \big\}_\mathrm{u} = \s{1}, & Y_1 &= \big\{ \eta(\omega) : \omega \in \Omega_1 \big\}_\mathrm{u} = \s{10, 20} \\
+			X_2 &= \big\{ \xi(\omega) : \omega \in \Omega_2 \big\}_\mathrm{u} = \s{2, 3}, & Y_2 &= \big\{ \eta(\omega) : \omega \in \Omega_2 \big\}_\mathrm{u} = \s{20, 30}
+		\end{align*}
+		Let $\tbd{X} = \{X_1, X_2\}$ and $\tbd{Y} = \{Y_1, Y_2\}$. Since $X_1 \neq X_2$, the correspondence $X_i \mapsto \Omega_i$ is injective. By Theorem 2.1, this stochastic phenomenon induces a unique well-defined uncertain mapping $f : \tbd{X} \to \tbd{Y}$ satisfying:
+		\[
+		f\big(\s{1}\big) = \s{10, 20}, \qquad f\big(\s{2, 3}\big) = \s{20, 30}
+		\]
+		
+		Furthermore, to evaluate the truth valuation of observing the output $v = 20$ under regime $\Omega_2$ (corresponding to the uncertain image $Y_2$), we compute the preimage scenarios $\eta^{-1}(20) \cap \Omega_2 = \{\omega_3, \omega_4\}$. Consistent with the theorem, the scenario-induced truth valuation equals the conditional probability:
+		\[
+		\mathcal{V}\big(20 \in_u \{Y_2\}\big) = P\big(\eta^{-1}(20) \mid \Omega_2\big) = \frac{P(\{\omega_3, \omega_4\})}{P(\Omega_2)} = \frac{2/6}{4/6} = \frac{1}{2} = 0.5
+		\]
+	\end{example}
 	\begin{thebibliography}{9}
 		\bibitem{tran2026extended}
 		Tran, M. C. (2026). \textit{Extended Logic and Mathematics of Uncertainty}. Zenodo. DOI: \href{https://doi.org/10.5281/zenodo.22031881}{10.5281/zenodo.22031881}.
