@@ -321,7 +321,31 @@
 		\]
 		In particular, for $t = \frac{1}{2}$, $F$ maps the countably infinite root-set uncertain element $X_{1/2}$ to the dual-valued uncertain element $Y_{1/2} = \big\{ -\frac{\sqrt{3}}{2}, \; \frac{\sqrt{3}}{2} \big\}_\mathrm{u}$, whereas at the boundary points $t = \pm 1$, $Y_{\pm 1}$ degenerates to the classical singleton constant $\s{0} \equiv 0$.
 	\end{example}
-	
+	\begin{definition}[Induced Set-Valued Mapping]
+		Let $\tbd{X}$ and $\tbd{Y}$ be two non-empty uncertain sets on universal sets $U$ and $V$, respectively, and let $f : \tbd{X} \to \tbd{Y}$ be an uncertain mapping assigning each uncertain element $X_0 \in \tbd{X}$ to its uncertain image $Y_0 = f(X_0) \in \tbd{Y}$.
+		
+		For each $X_0 \in \tbd{X}$, the \emph{induced set-valued mapping} associated with $f$ at $X_0$, denoted by $\Phi_{f, X_0} : X_0 \rightrightarrows Y_0$ (or $\Phi_{f, X_0} : X_0 \rightrightarrows V$), is the set-valued mapping that assigns to every element $x_0 \in X_0$ the entire image set $Y_0 \subseteq V$:
+		\[
+		\Phi_{f, X_0}(x_0) := f(X_0) = Y_0 \quad \text{for all } x_0 \in X_0
+		\]
+	\end{definition}
+	\begin{theorem}[Representation of Stochastic Phenomena via Uncertain Mappings]
+		Let $(\Omega, \mathcal{F}, P)$ be a probability space modeling a random phenomenon, and let $\xi : \Omega \to U$ and $\eta : \Omega \to V$ be two random variables representing the input and output observables, respectively. 
+		
+		Suppose $\mathcal{P} = \{\Omega_i : i \in I\}$ is a partition of $\Omega$ into non-empty measurable scenario blocks. For each $i \in I$, define the input and output uncertain elements induced by $\Omega_i$ as:
+		\[
+		X_i := \big\{ \xi(\omega) : \omega \in \Omega_i \big\}_\mathrm{u}, \qquad Y_i := \big\{ \eta(\omega) : \omega \in \Omega_i \big\}_\mathrm{u}
+		\]
+		Let $\tbd{X} = \{X_i : i \in I\}$ and $\tbd{Y} = \{Y_i : i \in I\}$ be the corresponding uncertain sets. If the correspondence $X_i \mapsto \Omega_i$ is injective across $I$, then there exists a unique well-defined uncertain mapping $f : \tbd{X} \to \tbd{Y}$ such that:
+		\[
+		f(X_i) = Y_i \quad \text{for all } i \in I
+		\]
+		Moreover, the truth valuation of any output realization $v \in V$ under the uncertain image $Y_i$ is bounded below by the conditional probability of its preimage scenarios:
+		\[
+		\mathcal{V}(v \in_u \{Y_i\}) = P\big(\eta^{-1}(v) \mid \Omega_i\big)
+		\]
+		when the scenario measure on $\Omega_i$ is induced by $P$.
+	\end{theorem}
 	\begin{thebibliography}{9}
 		\bibitem{tran2026extended}
 		Tran, M. C. (2026). \textit{Extended Logic and Mathematics of Uncertainty}. Zenodo. DOI: \href{https://doi.org/10.5281/zenodo.22031881}{10.5281/zenodo.22031881}.
