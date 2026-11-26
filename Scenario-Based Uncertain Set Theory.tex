@@ -292,7 +292,37 @@
 		\]
 		Thus, $f_2$ maps the single-toss uncertain element $X$ to the doubled-score uncertain element $Y = \s{0, 2}$.
 	\end{example}
-	
+	\begin{example}[Group-Induced Identity Uncertain Mapping]
+		Let $(G, +)$ be an additive group with identity element $0$, and let $X = (G)_\mathrm{u}$ be the uncertain element whose classical possibility domain is the entire group $G$ (or more generally, any subgroup $H \le G$). Consider the uncertain mapping $f : \{X\} \to \{X\}$ defined via the internal Minkowski sum:
+		\[
+		f(X) := \big\{ x + y : x \in X, \, y \in X \big\}_\mathrm{u}
+		\]
+		By the closure axiom of a group, $x + y \in G$ for all $x, y \in G$, which implies $\{x + y : x, y \in G\} \subseteq G$. Conversely, since $0 \in G$, every element $x \in G$ can be written as $x = x + 0$, yielding $G \subseteq \{x + y : x, y \in G\}$. 
+		
+		Consequently, $\{x + y : x, y \in G\} = G$, and applying the transfer operator gives:
+		\[
+		f(X) = (G)_\mathrm{u} = X
+		\]
+		Thus, when the underlying possibility domain possesses a group structure, the quadratic self-interaction mapping collapses into the \emph{identity uncertain mapping} $\mathrm{id}_{\{X\}}$.
+	\end{example}
+	\begin{example}[Non-Abelian Commutator Uncertain Mapping on $S_3$]
+		Consider the non-abelian symmetric group $(S_3, \circ)$ with identity element $e$. Let $\tbd{A}$ be a family of uncertain elements on $S_3$, and define the commutator uncertain mapping $f : \tbd{A} \to \tbd{B}$ by:
+		\[
+		f(X) := \big\{ x \circ y \circ x^{-1} \circ y^{-1} : x \in X, \, y \in X \big\}_\mathrm{u}
+		\]
+		Unlike the additive group sum in the previous example, this quadratic interaction is non-trivial and captures algebraic non-commutativity:
+		\begin{itemize}[leftmargin=*]
+			\item For the abelian subgroup uncertain element $X_1 = \big\{ e, (1\,2\,3), (1\,3\,2) \big\}_\mathrm{u} = (A_3)_\mathrm{u}$, all elements commute, causing $f(X_1)$ to collapse into the degenerate identity element:
+			\[
+			f(X_1) = \s{e} \equiv e
+			\]
+			\item For the non-commuting transposition pair $X_2 = \big\{ (1\,2), (1\,3) \big\}_\mathrm{u}$, computing pairwise commutators yields $(1\,2)\circ(1\,3)\circ(1\,2)\circ(1\,3) = (1\,3\,2)$ and $(1\,3)\circ(1\,2)\circ(1\,3)\circ(1\,2) = (1\,2\,3)$, transforming $X_2$ into the alternating subgroup uncertain element:
+			\[
+			f(X_2) = \big\{ e, (1\,2\,3), (1\,3\,2) \big\}_\mathrm{u} = X_1
+			\]
+		\end{itemize}
+		Here, $f$ maps a $2$-state uncertain element of odd permutations into a $3$-state uncertain subgroup, demonstrating non-trivial structural transformation under uncertain mappings.
+	\end{example}
 	\begin{example}[Functional Equation Induced Uncertain Mapping]
 		Consider a formal classical functional relation $f : [-1, 1] \to [-1, 1]$ satisfying the trigonometric identity:
 		\[
