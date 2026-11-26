@@ -323,6 +323,19 @@
 		\end{itemize}
 		Here, $f$ maps a $2$-state uncertain element of odd permutations into a $3$-state uncertain subgroup, demonstrating non-trivial structural transformation under uncertain mappings.
 	\end{example}
+	\begin{example}[Digital Image Zooming as an Uncertain Mapping]
+		Consider a discrete pixel grid $U = \mathbb{Z}^2$, and let a digital image be represented as an uncertain set $\tbd{X} = \{X_1, \dots, X_N\}$, where each $X_i = \s{(x_i, y_i)}$ denotes the discrete pixel location (or sub-pixel uncertainty region) of the $i$-th image element.
+		
+		A $1.5\times$ spatial zoom operation on the discrete grid induces an uncertain mapping $f : \tbd{X} \to \tbd{Y}$ that maps each pixel uncertain element $X_i$ to a localized neighborhood of target pixels $Y_i = f(X_i)$ via floor-ceiling grid projection:
+		\[
+		f\big(\s{(x, y)}\big) := \Big\{ (u, v) \in \mathbb{Z}^2 \;:\; u \in \{\lfloor 1.5x \rfloor, \lceil 1.5x \rceil\}, \; v \in \{\lfloor 1.5y \rfloor, \lceil 1.5y \rceil\} \Big\}_\mathrm{u}
+		\]
+		For instance, at $(x, y) = (1, 1)$, the single-pixel uncertain element $\s{(1, 1)}$ expands into the $4$-pixel uncertain block:
+		\[
+		f\big(\s{(1, 1)}\big) = \big\{ (1, 1), (1, 2), (2, 1), (2, 2) \big\}_\mathrm{u}
+		\]
+		whereas at even coordinates $(x, y) = (2, 2)$, it maps to the degenerate pixel $\s{(3, 3)} \equiv (3, 3)$. Overlapping projections between adjacent pixels naturally induce state collapse in $\mathrm{Conf}(\tbd{Y})$, quantifying interpolation overlap via the truth valuation $\mathcal{V}$.
+	\end{example}
 	\begin{example}[Functional Equation Induced Uncertain Mapping]
 		Consider a formal classical functional relation $f : [-1, 1] \to [-1, 1]$ satisfying the trigonometric identity:
 		\[
